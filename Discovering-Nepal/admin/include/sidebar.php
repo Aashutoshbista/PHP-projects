@@ -1,8 +1,8 @@
  <!-- Main Sidebar Container -->
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <h3>Notra.com</h3>
+    <a href="index.php" class="brand-link">
+      <h3>Discovering-Nepal</h3>
       
     </a>
 
@@ -12,7 +12,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="admin d-flex text-primary">
         
-          <h3><i class="nav-icon fa fa-users"></i></h3><h3>Admin pannel</h3>
+          <h3><i class="nav-icon fa fa-users"></i></h3><h3>Admin Pannel</h3>
         </div>
        
       </div>
@@ -39,8 +39,10 @@
                     </p>
                 </a>
             </li>
+           
                 <ul clas="nav nav-treeview">
-                    <li class="nav-item">
+                   <!--
+                    <li class="nav-item list-unstyled">
                         <a href="category.php" class="nav-link ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Catagory</p>
@@ -48,10 +50,19 @@
 
 
                     </li>
-                    <li class="nav-item">
-                        <a href="product.php" class="nav-link ">
+                    -->
+                    <li class="nav-item list-unstyled">
+                        <a href="Provinces.php" class="nav-link ">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Products</p>
+                            <p>Provinces</p>
+                        </a>
+
+
+                    </li>
+                    <li class="nav-item list-unstyled">
+                        <a href="Places.php" class="nav-link ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Places</p>
                         </a>
 
 
@@ -69,21 +80,14 @@
 
             
               <li class="nav-item">
-                <a href="addproduct.php" class="nav-link btn btn-primary ">
+                <a href="AddPlace.php" class="nav-link btn btn-primary ">
                 <i class="bi bi-arrow-bar-up"></i>
-                  <p>Add Books
+                  <p>Add Places
                   
                   </p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="../pdf.php" class="nav-link btn btn-primary ">
-                <i class="bi bi-arrow-bar-up"></i>
-                  <p>Add PDF
-                  
-                  </p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="../email/email.php/" class="nav-link btn btn-primary">
                
@@ -98,15 +102,10 @@
                   </p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="order.php" class="nav-link">
-                  <i class=" nav-icon fa fa-cog"></i>
-                  <p>Order details</p>
-                </a>
-              </li>
+             
               
             </ul>
-          </li>
+</li>
          
          
           

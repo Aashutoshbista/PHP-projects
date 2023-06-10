@@ -17,10 +17,7 @@ include('config/dbcon.php');
             <h1 class="m-0 text-dark">Dashboard</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              
-            </ol>
+        
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -39,47 +36,26 @@ include('config/dbcon.php');
           include("message.php");
           ?>
         </div>
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-              <?php
-                   /*   $query = "SELECT product_id FROM ctable ";
-                     $query_run= mysqli_query($conn,$query);
-                     $row= mysqli_num_rows($query_run);
-                     echo'<h3>'  .$row. '</h3>';
-                     */
-                     ?> 
-
-               
-
-                <p>Total places</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
+          
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
               <?php
-                    /*  $query = "SELECT item_id FROM items ";
+                      $query = "SELECT p_id FROM places ";
                      $query_run= mysqli_query($conn,$query);
                      $row= mysqli_num_rows($query_run);
-                     echo'<h3>'  .$row. '</h3>';*/
+                     echo'<h3>'  .$row. '</h3>';
                      ?> 
 
 
-                <p>Books</p>
+                <p>Places</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="product.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="Places.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -110,22 +86,13 @@ include('config/dbcon.php');
             <div class="small-box bg-danger bg-warning">
               <div class="inner">
               <?php
+                      
                       $query = "SELECT cat_id FROM catagories ";
                      $query_run= mysqli_query($conn,$query);
                      $row= mysqli_num_rows($query_run);
                      echo'<h3>'  .$row. '</h3>';
+                     
                      ?> 
-                    
-                    
-                    <!--
-                    mysqli_free_result($result);
-                    return $result;
-                        $db = new Database();
-                        $db->select('user','COUNT(user_id) as u_count',null,null,null,0);
-                        $users = $db->getResult();
-                   -->
-             
-
                 <p>Catagories</p>
               </div>
               <div class="icon">

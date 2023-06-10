@@ -20,6 +20,7 @@ include('Discovering-Nepal/database.php');
     <style>
         body{
           overflow-x: hidden;
+          overflow-y: hidden;
             color: white;
             background-color:black;
         }
@@ -87,7 +88,7 @@ include('Discovering-Nepal/database.php');
               
               
               <div class="d-inline "><a href="Discovering-Nepal/admin/login.php" class="text-white btn btn-primary   ">Log In</a></div>
-              <div class="d-inline "> <a href="Discovering-Nepal/signupdemo.php" class="text-white btn btn-danger btn-md  ">SignUp</a></div>
+              <div class="d-inline "> <a href="Discovering-Nepal/signup.php" class="text-white btn btn-danger btn-md  ">SignUp</a></div>
             
                       
            
@@ -105,119 +106,7 @@ include('Discovering-Nepal/database.php');
     
   <!--footer section start-->
 
-  <footer class="bg-dark text-center text-white" id="footer">
-    <!-- Grid container -->
-    <div class="container p-4">
-      <!-- section:message -->
-   
-      <!-- section:message -->
-      <section class="mb-4">
-        <p>
-         Hey wellcome to the footer section !!!
-         Hope you enjoy the jorney and we hope you will enjoy the futher jorney..
-        </p>
-      </section>
-  
-      <!-- Section: Form -->
-      <section class="">
-        <form action="">
-          <!--Grid row-->
-          <div class="row d-flex justify-content-center">
-            <!--Grid column-->
-            <div class="col-auto">
-              <p class="pt-2">
-                <strong>Sign up for our newsletter</strong>
-              </p>
-            </div>
-            <!--Grid column-->
-  
-            <!--Grid column-->
-            <div class="col-md-5 col-12">
-              <!-- Email input -->
-              <div class="form-outline form-white mb-4">
-                <input type="email" id="form5Example2" class="form-control" />
-                <label class="form-label" for="form5Example2">Email address</label>
-              </div>
-            </div>
-            <!--Grid column-->
-  
-            <!--Grid column-->
-            <div class="col-auto">
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-outline-light mb-4">
-                Subscribe
-              </button>
-            </div>
-            <!--Grid column-->
-          </div>
-          <!--Grid row-->
-        </form>
-      </section>
-      <!-- Section: Form -->
-  
-      <!-- Section: Text -->
-     
-      <!-- Section: Text -->
-  
-      <!-- Section: Links -->
-      <section class="">
-        <!--Grid row-->
-        <div class="row">
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-6 mb-3 mb-md-0">
-            <h5 class="text-uppercase">Contact us</h5>
-  
-            <ul class="list-unstyled mb-0">
-              <li>
-                <i class="fas fa-home"></i>
-                <a href="#!" class="text-white"> Kathmandu</a>
-              </li>
-              <li>
-                <i class="fas fa-phone"></i>
-                <a href="#!" class="text-white ">9811099199</a>
-              </li>
-              <li>
-                <i class="far fa-envelope"></i>
-                <a href="#!" class="text-white">teamvoltrontrio@gmail.com</a>
-              </li>
-             
-            </ul>
-          </div>
-          <!--Grid column-->
-  
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-           
-              
-              
-              
-              
-            </ul>
-          </div>
-          <!--Grid column-->
-  
-         
-  
-          
-        </div>
-        <!--Grid row-->
-      </section>
-      <!-- Section: Links -->
-    </div>
-    <!-- Grid container -->
-  
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">Discovering-Nepal.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <!-- Footer -->
-  <!-- Footer -->
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+ 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->

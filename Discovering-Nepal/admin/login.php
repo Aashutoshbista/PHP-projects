@@ -18,7 +18,7 @@ if(isset($_SESSION['auth'])){
                 <?php
                     if(isset($_SESSION['auth_status'])){
                         ?>
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <div class="alert alert-warning alert-dismissible fade show" id="Element" role="alert" >
                 <strong>Hey!</strong> <?php echo $_SESSION['auth_status']; ?>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -56,7 +56,7 @@ if(isset($_SESSION['auth'])){
                                 <div class="form-group">
                                     <button type="submit" name="login_btn" class="btn btn-primary btn-block">Login</button>
                                 </div>
-                                <a href="../signupdemo.php" class="btn btn-danger btn-block">Sign UP</a>
+                                <a href="../signup.php" class="btn btn-danger btn-block">Sign UP</a>
 
                             </form>
                         </div>
@@ -69,7 +69,16 @@ if(isset($_SESSION['auth'])){
 
 
 
+<script>
+            var element = document.getElementById("Element");
+            function hideElement() {
+      element.style.display = "none";
+    }
+    setTimeout(hideElement, 2000);
 
+
+
+</script>
 
 
 

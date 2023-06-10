@@ -23,6 +23,8 @@
             $pass2 = $_POST['password'];
             $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^"; 
            $phone=$_POST['phone'];
+           $selectedTags=$_POST["Tags"];
+           $tags=implode(",",$selectedTags);
           
        
 /*
@@ -109,18 +111,10 @@ if (empty($name)) {
                     }
 
                     if($emptyerror==''){
-                        if(isset($_POST['Tags'])){
-                            $selectedTags=$_POST["Tags"];
-                            foreach ($selectedTags as $tags) {
-                               
-                                $query1="INSERT INTO tags(tags,user_email)values('$tags','$email')";
-                                
-
-                                $query1_run=mysqli_query($conn,$query1);
-                            }
+                        
                             
-                            if($query1_run){
-                            $query="INSERT INTO users(name,email,password,role_as,phone,age,country) VALUES('$validname','$validmail','$validpass','0','$validphone','$validage','$country')";
+                            
+                            $query="INSERT INTO users(name,email,password,role_as,phone,age,country,tags) VALUES('$validname','$validmail','$validpass','0','$validphone','$validage','$country','$tags')";
                            
                            
                        
@@ -136,9 +130,7 @@ if (empty($name)) {
                    }
        
                 }
-            }
-        }
-             
+       
         
 
         

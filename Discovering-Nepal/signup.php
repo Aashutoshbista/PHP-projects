@@ -19,9 +19,9 @@ session_start();
                 
                     
                 
-                <div class="card my-5 col-md-6">
+                <div class="card my-5 col-md-7">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <strong>Hey! 
+                                            <strong>Hey!
                                             <?php
                                                 if(isset($_SESSION['status']))
                                                     {
@@ -297,15 +297,26 @@ session_start();
                                     
                                             <label>Preferences and Interests:</label>
                                                     <div class="checkboxes" required>
-                                                            <label><input type="checkbox" name="Tags[]" value="Cultural Heritages" onclick="limitCheckboxSelection()"> Cultural Heritages</label>
-                                                            <label><input type="checkbox" name="Tags[]" value="Lakes" onclick="limitCheckboxSelection()"> Lakes</label>
-                                                            <label><input type="checkbox" name="Tags[]" value="National Parks" onclick="limitCheckboxSelection()"> National Parks</label>
-                                                            <label><input type="checkbox" name="Tags[]" value="Temples" onclick="limitCheckboxSelection()"> Temples</label>
-                                                            <label><input type="checkbox" name="Tags[]" value="Trekking and Hiking" onclick="limitCheckboxSelection()"> Trekking and Hiking</label>
-                                                            <label><input type="checkbox" name="Tags[]" value="Adventure Sports" onclick="limitCheckboxSelection()"> Adventure Sports</label>
-                                                            <label><input type="checkbox" name="Tags[]" value="Religious and Spiritual Sites" onclick="limitCheckboxSelection()"> Religious and Spiritual Sites</label>
+                                                    <div class="row">
+                                                    <div class="col-md-4">  <label><input type="checkbox" name="Tags[]" value="Cultural Heritages" onclick="limitCheckboxSelection()"> Cultural Heritages</label></div>
+                                                   <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="Lakes" onclick="limitCheckboxSelection()"> Lakes</label></div>
+
+                                                       <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="National Parks" onclick="limitCheckboxSelection()"> National Parks</label></div>
+                                                </div>
+                                                <div class="row">
+                                                <div class="col-md-4">      <label><input type="checkbox" name="Tags[]" value="Temples" onclick="limitCheckboxSelection()"> Temples</label></div>
+                                                <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="Trekking and Hiking" onclick="limitCheckboxSelection()"> Trekking and Hiking</label></div>
+                                                            
+                                                <div class="col-md-4">   <label><input type="checkbox" name="Tags[]" value="Adventure Sports" onclick="limitCheckboxSelection()"> Adventure Sports</label></div>
+
+                                                </div>
+                                                <div class="row">
+                                                <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="Religious and Spiritual Sites" onclick="limitCheckboxSelection()"> Religious and Spiritual Sites</label></div>
+                                                <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="HillStation" onclick="limitCheckboxSelection()"> HillStation</label></div>
+                                                <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="Valleys" onclick="limitCheckboxSelection()"> Valleys</label></div>
                                                     </div>
 
+                                                </div>
                                                     <div class="button-container">
                                                     <div class="row">
                                                                 <div class="col-9">
