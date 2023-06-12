@@ -20,7 +20,7 @@ session_start();
                     
                 
                 <div class="card my-5 col-md-7">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" >
                                             <strong>Hey!
                                             <?php
                                                 if(isset($_SESSION['status']))
@@ -37,27 +37,31 @@ session_start();
                 </div>
                         <div class="card-header bg-light ">
                             
-                            <form action="process.php" method="POST" autocomplete="off" >
+                            <form action="process.php" method="POST" autocomplete="off" name="myform" >
                                 <!---->
                                         <div id="step1"  >
                                         <h2 class="text-center">Sign Up</h2>
-                                                <div class="form-group">
+                                                <div class="form-group" id="name">
                                                             <label for="">Name</label>
                                                             <input type="text" name="name" class="form-control" placeholder="Name">
+                                                            <span class="forerror text-danger" ></span>
                                 
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" id="email">
                                                             <label for="">Email:</label>
                                                             <input type="text" name="email" class="form-control" placeholder="Email">
+                                                            <span class="forerror text-danger" ></span>
                                                 </div>
-                                                <div class="form-group">
-                                                            <label for="">Phone::</label>
+                                                <div class="form-group" id="phone">
+                                                            <label for="">Phone:</label>
                                                             <input type="text" name="phone" class="form-control" placeholder="phone">
+                                                            <span class="forerror text-danger" ></span>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" id="age">
                                                             <div class="">
                                                             <label for="">Age:</label>
                                                             <input type="text" name="age" class="form-control" placeholder="Age">
+                                                            <span class="forerror text-danger" ></span>
                                                 </div>
                                         </div>
                                                 <div class="row mt-2">
@@ -65,8 +69,9 @@ session_start();
                                                                             <a href="admin/login.php" class="btn btn-primary ">Log In</a></p>
                                                                 </div>
                                                                 <div class="button-container col">
-                                                                        <button type="button" class="next-button btn btn-success"  onclick="showStep('step2')">Next</button>
+                                                                        <button type="button" class="next-button btn btn-success"  onclick=validateForm()>Next</button>
                                                                 </div>
+                                                               <!-- onclick="showStep('step2')"-->
                                                 </div>
                                         </div>
                                         <div id="step2" style="display:none;">
@@ -272,13 +277,16 @@ session_start();
                                                                                 </select>
                                                                 </div>
 
-                                                    <div class="form-group">
+                                                    <div class="form-group" id="pass">
                                                                 <label for="">Password:</label>
-                                                                <input type="password" name="password" class="form-control" placeholder="Password">
+                                                                <input type="password" name="pass"    class="form-control" placeholder="Password">
+                                                                <span class="forerror text-danger" ></span>
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" id="repass" >
+
                                                                 <label for="">Re-Enter Password:</label>
-                                                                <input type="password" name="password" class="form-control" placeholder="Re-Enter password">
+                                                                <input type="password" name="repass" class="form-control" placeholder="Re-Enter password">
+                                                                <span class="forerror text-danger" ></span>
                                                     </div>
                                                     
                                                     <div class="button-container">
@@ -287,7 +295,7 @@ session_start();
                                                                                             <button type="button" class="next-button btn btn-dark "  onclick="showStep('step1')">Previous</button>
                                                                             </div>
                                                                             <div class="col">
-                                                                                        <button type="button" class="next-button btn btn-success"  onclick="showStep('step3')">Next</button>
+                                                                                        <button type="button" class="next-button btn btn-success"  onclick=validatesecondForm()>Next</button>
                                                                             </div>                                            
                                                                 </div>
                                                     </div>
@@ -334,52 +342,9 @@ session_start();
                 </div>
             </div>
         </div>
+        <script  src="Javascript/signup.js"></script>
         <script>
-                        function showStep(step) {
-                        if (step === 'step1') {
-                            document.getElementById('step1').style.display = 'block';
-                            document.getElementById('step2').style.display = 'none';
-                            
-                        }else if(step === 'step2'){
-                            document.getElementById('step1').style.display = 'none';
-                            document.getElementById('step2').style.display = 'block';
-                            document.getElementById('step3').style.display = 'none';
-                          
-
-                        } 
-                        else if(step === 'step3') {
-                            document.getElementById('step1').style.display = 'none';
-                            
-                            document.getElementById('step2').style.display = 'none';
-                            document.getElementById('step3').style.display = 'block';
-                        }
-                        }
-
-                        function validateEmail() {
-                        // Email validation logic
-                        return true;
-                        }
-
-                    function limitCheckboxSelection() {
-                    var checkboxes = document.querySelectorAll('input[type="checkbox"][name="interests[]"]');
-                    var checkedCount = 0;
-                    for (var i = 0; i < checkboxes.length; i++) {
-                        if (checkboxes[i].checked) {
-                        checkedCount++;
-                        }
-                    }
-                    if (checkedCount >= 3) {
-                        for (var i = 0; i < checkboxes.length; i++) {
-                        if (!checkboxes[i].checked) {
-                            checkboxes[i].disabled = true;
-                        }
-                        }
-                    } else {
-                        for (var i = 0; i < checkboxes.length; i++) {
-                        checkboxes[i].disabled = false;
-                        }
-                    }
-                    }
+                     
 
 </script>
    <!-- Optional JavaScript; choose one of the two! -->
