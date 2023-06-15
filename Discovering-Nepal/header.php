@@ -74,7 +74,14 @@ include('database.php');?>
                 <div class="dropdown">
            <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   
-                  <?php
+                <img src="profile.png"  alt="profile" style="height:30px;">
+               
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <form action="code.php"method="POST">
+                <div class="btn btn-secondary ">
+            <a class="dropdown-item " href="EditProfile.php">
+            <?php
                if(isset($_SESSION['auth'])){
               echo $_SESSION['auth_user']['user_name'] ;
               }
@@ -83,13 +90,12 @@ include('database.php');?>
               }
                
                ?>
-               
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <form action="code.php"method="POST">
+               </a>
+               </div>
+              
               <a class="dropdown-item" name="ChangePassword" href="userproduct.php">add favplace</a>
               
-              <a class="dropdown-item" href="EditProfile.php">Edit Profile</a>
+              
               <a class="dropdown-item" name="ChangePassword" href="ChangePassword.php?users_id=<?php  echo $_SESSION['auth_user']['user_id'] ;  ?>">Change password</a>
              
                 <button type="submit" name="logout_btn" class="dropdown-item">Logout</button>
