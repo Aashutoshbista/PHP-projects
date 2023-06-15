@@ -31,4 +31,4 @@
   <link rel="stylesheet" href="assests/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 </head>
 <body >
-<div class="wrapper" >
+<div class="wrapper" style="height:auto;" >
