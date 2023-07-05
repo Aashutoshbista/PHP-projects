@@ -55,37 +55,73 @@ if(isset($_POST['Deleteplace']))
             }
 
 }
+if(isset($_POST['UDeleteplace']))
 
-
-
-/*Update product 
-if(isset($_POST['updateproduct']))
 {
-    $name=$_POST['product_title'];
-    $product_cat=$_POST['product_cat'];
-    $product_auther=$_POST['product_auther'];
-    $product_description=$_POST['product_desc'];
-    $product_price=$_POST['product_price'];
-    $product_qty=$_POST['product_qty'];
-    $product_img=$_FILES['product_img']['name'];
+    $placeid=$_POST['deleteplace_id'];
+    $query="DELETE FROM u_places WHERE p_id='$placeid'"; 
+    $query_run = mysqli_query($conn,$query);
+    if($query_run){
 
 
-    $query_up="UPDATE  books SET books_name='$name',product_cat='$product_cat',books_auther='$product_auther',books_discription='$product_description',books_price='$product_price',book_quantity='$product_quantity',book_cat="$product_cat"  WHERE id='$user_id'";
-
-
-    
-    $query_up_run = mysqli_query($conn,$query);
-    if($query_up_run){
-
-            $_SESSION['status']="User updated sucessfully";
-            header("Location: register.php");
+            $_SESSION['status']="Place deleted sucessfully";
+            header("Location:SuggestedPlace.php");
             }
             else
             {
-            $_SESSION['status']="User updated fail";
-            header("Location: register.php");
+            $_SESSION['status']="Place deleted fail";
+            header("Location:SuggestedPlace.php");
             }
 
 }
-*/
+
+
+
+
+if(isset($_POST['submitSplace']))
+{ 
+    $p_prov=$_POST['provinces'];
+  
+   $id=$_POST['p_id'];
+
+   
+    $name=$_POST['p_name'];
+    
+    $p_longitude=$_POST['p_longitude'];
+    $p_description=$_POST['p_description'];
+    $p_latitude=$_POST['p_latitude'];
+    $p_cat=$_POST['catagory'];
+    $dataofcat=implode(",",$p_cat);
+    $p_type=$_POST['type'];
+    
+
+    $query="INSERT INTO places(p_name,p_longitude,p_latitude,p_discription,p_catagory,p_prov,p_type) 
+    VALUES('$name','$p_longitude','$p_latitude','$$p_description'
+    ,'$dataofcat','$p_prov','$p_type')";
+    $query_run=mysqli_query($conn,$query);
+
+    if($query_run){
+        $sql = "DELETE  FROM u_places WHERE p_id = $id";
+        $sql_run=mysqli_query($conn,$sql);
+        if($sql_run){
+            $_SESSION['status']="Place Updated Sucessfully";
+            header("Location:Places.php");
+            }
+            else
+            {
+            $_SESSION['status']="Updated Fail";
+            header("Location: SuggestedPlace.php");
+            }
+
+        }else{
+            $_SESSION['status']="Updated Fail";
+            header("Location: SuggestedPlace.php");
+        }
+
+
+    
+        
+
+}
+
 ?>

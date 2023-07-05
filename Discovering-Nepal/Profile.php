@@ -8,12 +8,7 @@ include('header.php');
 
 ?>
 <main>
-<?php           
-if(isset($_SESSION['status'])){
-echo"<h4>".$_SESSION['status']."</h4>";
-unset($_SESSION['status']);
- }
-
+<?php
 $user_id=$_SESSION['auth_user']['user_id'];
   $query="SELECT * FROM users WHERE id=$user_id";
   $query_run= mysqli_query($conn,$query);
@@ -37,30 +32,23 @@ $user_id=$_SESSION['auth_user']['user_id'];
                     <div class="mt-3">
                       <h4><?php echo $row['name'];  ?></h4>
                       <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">
-                      <?php echo $row['u_addr'];
-                      ?>
-                      </p>
+                      <p class="text-muted font-size-sm"></p>
                     
                     </div>
                   </div>
                 </div>
               </div>
 </div>
-            
+              
             <div class="col-md-8">
               <div class="card mb-3">
                 <div class="card-body">
-                <form action="code.php" method="POST">
-                <input type="hidden" name="user_id" value="<?php echo $row['id']?>"></br>
                   <div class="row">
-                  
                     <div class="col-sm-3">
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <input type="text" name="user_name" class="form-control"value="<?php echo $row['name']?>"></br>
-                   
+                    <?php echo $row['name'];  ?>
                     </div>
                   </div>
                   <hr>
@@ -69,8 +57,7 @@ $user_id=$_SESSION['auth_user']['user_id'];
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <input type="email" name="user_email" class="form-control"value="<?php echo $row['email']?>"></br>
-                    
+                    <?php echo $row['email'];  ?>
                     </div>
                   </div>
                   <hr>
@@ -79,8 +66,7 @@ $user_id=$_SESSION['auth_user']['user_id'];
                       <h6 class="mb-0">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <input type="text" name="user_phone" class="form-control"value="<?php echo $row['phone']?>"></br>
-                    
+                    <?php echo $row['phone'];  ?>
                     </div>
                   </div>
                   <hr>
@@ -90,8 +76,7 @@ $user_id=$_SESSION['auth_user']['user_id'];
                       <h6 class="mb-0">Age</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <input type="text" name="user_age" class="form-control"value="<?php echo $row['age']?>"></br>
-                   
+                    <?php echo $row['age'];  ?>
                     </div>
                   </div>
                   <hr>
@@ -102,36 +87,27 @@ $user_id=$_SESSION['auth_user']['user_id'];
                       <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    <input type="text" name="user_address" class="form-control"value="<?php echo $row['u_addr']?>"></br>
-                    
+                    <?php echo $row['u_addr'];  ?>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      
-                      <button type="submit" name="updateuser" class="btn btn-primary">Update </button>
+                      <a class="btn btn-info " target="__blank" href="EditProfile.php">Edit</a>
                     </div>
                   </div>
                 </div>
               </div>
 
-             
+              
 
 
             </div>
-            </form>
           </div>
-          
+
         </div>
-       
-    </div>
-    
-    
-    <?php 
+    </div><?php 
      }}
-     
     ?>
              
     </main>
-    

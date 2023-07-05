@@ -80,6 +80,66 @@ if(isset($_SESSION['auth_user']['user_id']) && $_SESSION['auth']=="0") {
     }
 }
 }
+if(isset($_POST['updateuser'])){
+$user_id=$_POST['user_id'];
+$user_name=$_POST['user_name'];
+$user_age=$_POST['user_age'];
+$user_phone=$_POST['user_phone'];
+$user_email=$_POST['user_email'];
+$user_addr=$_POST['user_address'];
+
+if($user_name && $user_age && $user_phone && $user_email){
+$querypass="SELECT * FROM users WHERE id=$user_id";
+$querypass_run=mysqli_query($conn,$querypass);
+$queryup="UPDATE  users SET name='$user_name',age='$user_age',phone='$user_phone',email='$user_email',u_addr='$user_addr'  WHERE id='$user_id'";
+$queryup_run=mysqli_query($conn,$queryup);
+if($queryup_run){
+    $_SESSION['status']="Updated Sucessfully  ";
+    header("Location:Profile.php");
+    
+}else{
+    $_SESSION['status']=" UnSucessfully  ";
+    header("Location:Profile.php");
+}
+
+}else{
+    $_SESSION['status']="The fields cannot be Empty  ";
+    header("Location:EditProfile.php");
+}
+
+
+
+}
+
+
+
+if(isset($_POST['submitplaces'])){
+    $name=$_POST['p_name'];
+    $p_prov=$_POST['provinces'];
+    $p_longitude=$_POST['p_longitude'];
+    $p_description=$_POST['p_description'];
+    $p_latitude=$_POST['p_latitude'];
+ 
+    
+    $p_img=$_FILES['p_img']['name'];
+
+
+
+ $query="INSERT INTO u_places(p_name,p_longitude,p_latitude,p_discription,p_image,p_prov) 
+ VALUES('$name','$p_longitude','$p_latitude','$$p_description','$p_img','$p_prov')";
+ $query_run=mysqli_query($conn,$query);
+ if($query_run){
+     move_uploaded_file($_FILES["p_img"]["tmp_name"],"images/".$_FILES["p_img"]["name"]);
+     $_SESSION['status']=" sucess";
+     header("Location: AddPlaces.php");
+     }
+     else
+     {
+     $_SESSION['status']=" failed";
+     header("Location: AddPlaces.php");
+     }
+ 
+    }
 
 
 

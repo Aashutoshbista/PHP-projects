@@ -14,12 +14,17 @@ include('database.php');?>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/e5823df915.js" crossorigin="anonymous"></script>
+    <style>
+
+
+
+    </style>
     
     <title>Discovering-Nepal</title>
     <style>
       body{
         overflow-x: hidden;
-        overflow-y: hidden;
+      
       }
     </style>
     
@@ -80,7 +85,7 @@ include('database.php');?>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <form action="code.php"method="POST">
                 <div class="btn btn-secondary ">
-            <a class="dropdown-item " href="EditProfile.php">
+            <a class="dropdown-item " href="Profile.php?users_id=<?php  echo $_SESSION['auth_user']['user_id'] ;  ?>">
             <?php
                if(isset($_SESSION['auth'])){
               echo $_SESSION['auth_user']['user_name'] ;
@@ -93,7 +98,7 @@ include('database.php');?>
                </a>
                </div>
               
-              <a class="dropdown-item" name="ChangePassword" href="userproduct.php">add favplace</a>
+              <a class="dropdown-item" name="ChangePassword" href="AddPlaces.php">Add Place</a>
               
               
               <a class="dropdown-item" name="ChangePassword" href="ChangePassword.php?users_id=<?php  echo $_SESSION['auth_user']['user_id'] ;  ?>">Change password</a>

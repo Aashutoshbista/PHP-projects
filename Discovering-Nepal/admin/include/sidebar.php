@@ -87,6 +87,14 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="SuggestedPlace.php" class="nav-link btn btn-primary ">
+                <i class="bi bi-arrow-bar-up"></i>
+                  <p>Suggested Places
+                  
+                  </p>
+                </a>
+              </li>
               
               <li class="nav-item">
                 <a href="Csvfile.php" class="nav-link btn btn-primary ">

@@ -1,18 +1,3 @@
-<?php
-
- 
-
-
-
-
-
-
-
-
-?>
-
-
-
  
 
 
@@ -51,9 +36,11 @@ include("config/dbcon.php");
                                     echo"<h4>".$_SESSION['status']."</h4>";
                                     unset($_SESSION['status']);
                                     }
-                                 
-                                    $p_id=$_GET["p_id"];
-                                    
+                                    if(isset($_GET['edit']))
+
+{
+    $p_id = $_GET['books_id'];
+                                   
 
                                     $query="SELECT * FROM u_places WHERE p_id=$p_id";
                                     $query_run= mysqli_query($conn,$query);
@@ -68,13 +55,12 @@ include("config/dbcon.php");
 
                                             <div class="admin-content-container">
                                                     <h2 class="admin-heading"></h2>
-                                                    <form id="SPlaces" action="pcode.php" class="add-post-form row" method="POST" enctype="multipart/form-data">
+                                                    <form id="createProduct" action="pcode.php" class="add-post-form row" method="POST" enctype="multipart/form-data">
                                                         <div id="step1" style="display:block;">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="">Name</label>
-                                                                <input type="text" name="p_name" class="form-control"value="<?php echo $row['p_name']?>"></br>
-                                                                <input type="hidden" name="p_id" value="<?php echo $row['p_id']?>">
+                                                                <input type="text" class="form-control product_title" name="p_name" placeholder="Place Name" requried/>
                                                             </div>
                                                             <div class="row">
                                                             <div class="col">
@@ -89,7 +75,7 @@ include("config/dbcon.php");
                                                                       ?>
                                                                        
                                                                       <select name="provinces" class="form-control " >
-                                                                      <option value="" selected disabled>Given Provinence is <?php echo $row['p_prov']?></option>
+                                                                      <option value="" selected disabled>Select Provinece</option>
                                                                       <?php
                                                                       if(mysqli_num_rows($query_run) > 0)
                                                                       {
@@ -131,8 +117,7 @@ include("config/dbcon.php");
                                                             
                                                             <div class="form-group">
                                                                 <label for="">Place Description</label>
-                                                                
-                                                                <textarea class="form-control place_description" value="<?php echo $row['p_discription']?>" name="p_description" rows="8" cols="80" requried></textarea>
+                                                                <textarea class="form-control place_description" name="p_description" rows="8" cols="80" requried></textarea>
                                                             </div>
                                                             <div class="show-error"></div>
 
@@ -142,24 +127,23 @@ include("config/dbcon.php");
                                                                 </div>
 
                                                                     </div>
-                                                                    </div>
 
 
                                                         <div id="step2" style="display:none;">
                                                         <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="">Images</label></br>
+                                                                <label for="">Images</label>
                                                                 <input type="file" accept=".png ,.jpg,.jpng" class="Place_image" name="p_img">
                                                                 <img id="image" src="" width="100px"/>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="">Longitude</label>
-                                                                <input type="text" class="form-control place_longitude" value="<?php echo $row['p_longitude']?>" name="p_longitude" >
+                                                                <input type="text" class="form-control place_longitude" name="p_longitude" >
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="">Latitude</label>
-                                                                <input type="text" class="form-control place_latitude" value="<?php echo $row['p_latitude']?>" name="p_latitude" >
+                                                                <input type="text" class="form-control place_latitude" name="p_latitude" >
 
                                                             </div>
 
@@ -208,7 +192,7 @@ include("config/dbcon.php");
                                                                                 <button type="button" class="next-button btn btn-dark "  onclick="showStep('step1')">Previous</button>
                                                                 </div>
                                                                 <div class="col ">
-                                                                <button type="submit" name="submitSplace" class="btn btn-primary float-right" >Submit</button>
+                                                                <button type="submit" name="submit" class="btn btn-primary float-right" >Submit</button>
                                                                 </div>                                            
                                                             </div>
                                                                     </div>
@@ -228,7 +212,7 @@ include("config/dbcon.php");
                     </div>
                 </div>
             <?php
-       } }
+       } }}
         ?>
                 <script>
                         function showStep(step) {
