@@ -26,25 +26,41 @@ include('database.php');?>
         overflow-x: hidden;
       
       }
+      .navbar {
+  		
+ 		background-image: url('Backg.png');
+ 		
+  		
+  		background-repeat:repeat;
+  	
+  		background-size:30%,auto;
+  		
+  	
+      height:60PX; /* Adjust the height as needed */
+      width:100%; /* Adjust the width as needed */
+      /* Additional styling for the navbar brand */
+  }
+ 
+     
     </style>
     
  <body>
        <!--navbar-->
-       <nav class="navbar navbar-expand-lg navbar-dark text-dark   bg-dark text-center text-white">
+       <nav class="navbar navbar-expand-lg navbar-dark text-dark   bg-dark text-center text-dark ">
             
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.php">D-N</a>
+          <a class="navbar-brand text-dark " href="index.php">D-N</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                <a class="nav-link " aria-current="page" style="color:#e2f59d; text-shadow: .1rem .1rem .5rem black;font-weight:700;font-size: 19px;" href="index.php">Home</a>
               </li>
              
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" style="color:#e2f59d; text-shadow: .1rem .1rem .5rem black;font-weight:700;font-size: 19px;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Places
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -67,7 +83,7 @@ include('database.php');?>
                   
                 </ul>
                 <li class="nav-item">
-                    <a class="nav-link" href="Contactus.php">Contact Us</a>
+                    <a class="nav-link" style="color:#e2f59d; text-shadow: .1rem .1rem .5rem black;font-weight:700;font-size: 19px;" href="Contactus.php">Contact Us</a>
                   </li>
               </li>
              

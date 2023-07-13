@@ -4,6 +4,19 @@ session_start();
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+    body{
+        background-image: url('Mount-Everest.webp');
+
+    }
+    .box{
+        opacity: 0.65;
+    }
+    .names{
+        font-weight:700;
+    }
+    
+    </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,22 +32,8 @@ session_start();
                 
                     
                 
-                <div class="card my-5 col-md-7">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert" >
-                                            <strong>Hey!
-                                            <?php
-                                                if(isset($_SESSION['status']))
-                                                    {
-                                                            echo $_SESSION['status'];
-                                                            unset($_SESSION['status']);
-                                                    }
-                                        
-                                        ?>
-                                </strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                </div>
+                <div class="card my-5 col-md-7 box">
+               
                         <div class="card-header bg-light ">
                             
                             <form action="process.php" method="POST" autocomplete="off" name="myform" >
@@ -42,24 +41,24 @@ session_start();
                                         <div id="step1"  >
                                         <h2 class="text-center">Sign Up</h2>
                                                 <div class="form-group" id="name">
-                                                            <label for="">Name</label>
+                                                            <label class="names" for="">Name:</label>
                                                             <input type="text" name="name" class="form-control" placeholder="Name">
                                                             <span class="forerror text-danger" ></span>
                                 
                                                 </div>
                                                 <div class="form-group" id="email">
-                                                            <label for="">Email:</label>
+                                                            <label class="names" for="">Email:</label>
                                                             <input type="text" name="email" class="form-control" placeholder="Email">
                                                             <span class="forerror text-danger" ></span>
                                                 </div>
                                                 <div class="form-group" id="phone">
-                                                            <label for="">Phone:</label>
+                                                            <label class="names" for="">Phone:</label>
                                                             <input type="text" name="phone" class="form-control" placeholder="phone">
                                                             <span class="forerror text-danger" ></span>
                                                 </div>
                                                 <div class="form-group" id="age">
                                                             <div class="">
-                                                            <label for="">Age:</label>
+                                                            <label class="names" for="">Age:</label>
                                                             <input type="text" name="age" class="form-control" placeholder="Age">
                                                             <span class="forerror text-danger" ></span>
                                                 </div>
@@ -69,7 +68,7 @@ session_start();
                                                                             <a href="admin/login.php" class="btn btn-primary ">Log In</a></p>
                                                                 </div>
                                                                 <div class="button-container col">
-                                                                        <button type="button" class="next-button btn btn-success"  onclick=validateForm()>Next</button>
+                                                                        <button type="button" class=" next-button btn btn-success"  onclick=validateForm()>Next</button>
                                                                 </div>
                                                                <!-- onclick="showStep('step2')"-->
                                                 </div>
