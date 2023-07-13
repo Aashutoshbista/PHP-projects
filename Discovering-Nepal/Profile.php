@@ -20,6 +20,32 @@ $user_id=$_SESSION['auth_user']['user_id'];
 
 
 ?>
+<style>
+  .round .cam{
+    font-size:24px;
+  }
+.round{
+  position: absolute;
+  bottom:110px;
+  right: 135px;
+ 
+  width: 32px;
+  height: 32px;
+  line-height: 33px;
+  text-align: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+ .round input[type = "file"]{
+  position: absolute;
+  transform: scale(2);
+  opacity: 0;
+}
+input[type=file]::-webkit-file-upload-button{
+    cursor: pointer;
+}
+
+</style>
 
 <div class="container pt-3">
     <div class="main-body">
@@ -27,8 +53,15 @@ $user_id=$_SESSION['auth_user']['user_id'];
             <div class="col-md-4 mb-3">
               <div class="card">
                 <div class="card-body">
+                  <form  class="form" id="form" action="" enctype="multipart/form-data" method="post">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <img src="<?php echo"user_images/". $row['user_image']; ?>" alt="Admin" class="rounded-circle" width="150">
+                    <div class="round">
+                    <li class="fa fa-camera cam " style="color:black;"></li>
+                    <input type="file" accept=".png ,.jpg,.jpng" id="image" class="Profile_image" name="p_img">
+                    <img id="image" src="" width="100px"/>
+                    </div>
+                    </form>
                     <div class="mt-3">
                       <h4><?php echo $row['name'];  ?></h4>
                       <p class="text-secondary mb-1">Full Stack Developer</p>
@@ -108,6 +141,43 @@ $user_id=$_SESSION['auth_user']['user_id'];
         </div>
     </div><?php 
      }}
+    ?>
+    <script type="text/javascript">
+      document.getElementById("image").onchange=function(){
+        document.getElementById('form').submit();
+      }
+    </script>
+    <?php
+    if(isset($_FILES["p_img"]["name"])){
+      $user_id=$_SESSION['auth_user']['user_id'];
+      $profile=$_FILES['p_img']['name'];
+   
+
+      
+
+      // Image validation
+      
+      
+      
+      
+       
+       
+        $query = "UPDATE users SET user_image = '$profile' WHERE id = $user_id";
+        $query_run=mysqli_query($conn, $query);
+        if($query_run){
+          move_uploaded_file($_FILES["p_img"]["tmp_name"],"user_images/".$_FILES["p_img"]["name"]);
+          $_SESSION['status']=" sucess";
+          
+        }
+       else{
+        $_SESSION['status']=" Fail";
+        
+
+       }
+      }
+    
+      
+
     ?>
              
     </main>

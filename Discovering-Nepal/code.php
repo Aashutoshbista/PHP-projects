@@ -88,20 +88,24 @@ $user_phone=$_POST['user_phone'];
 $user_email=$_POST['user_email'];
 $user_addr=$_POST['user_address'];
 
-if($user_name && $user_age && $user_phone && $user_email){
+
+if($user_name!== ''  && $user_age!== ''  && $user_phone!== ''  && $user_email!== '' ){
 $querypass="SELECT * FROM users WHERE id=$user_id";
 $querypass_run=mysqli_query($conn,$querypass);
-$queryup="UPDATE  users SET name='$user_name',age='$user_age',phone='$user_phone',email='$user_email',u_addr='$user_addr'  WHERE id='$user_id'";
+
+$queryup="UPDATE  users SET name='$user_name',age='$user_age',phone='$user_phone',email='$user_email',u_addr='$user_addr' WHERE id='$user_id' ";
 $queryup_run=mysqli_query($conn,$queryup);
+
 if($queryup_run){
+   
     $_SESSION['status']="Updated Sucessfully  ";
-    header("Location:Profile.php");
+    header("Location:EditProfile.php");
     
 }else{
     $_SESSION['status']=" UnSucessfully  ";
-    header("Location:Profile.php");
+    header("Location:EditProfile.php");
 }
-
+}
 }else{
     $_SESSION['status']="The fields cannot be Empty  ";
     header("Location:EditProfile.php");
@@ -109,7 +113,6 @@ if($queryup_run){
 
 
 
-}
 
 
 
@@ -129,8 +132,7 @@ if(isset($_POST['submitplaces'])){
  VALUES('$name','$p_longitude','$p_latitude','$$p_description','$p_img','$p_prov')";
  $query_run=mysqli_query($conn,$query);
  if($query_run){
-     move_uploaded_file($_FILES["p_img"]["tmp_name"],"images/".$_FILES["p_img"]["name"]);
-     $_SESSION['status']=" sucess";
+     
      header("Location: AddPlaces.php");
      }
      else
@@ -141,6 +143,25 @@ if(isset($_POST['submitplaces'])){
  
     }
 
+
+    if(isset($_POST['submitProfile'])){
+        $user_id=$_POST['user_id'];
+        echo $user_id;
+       /*
+        $profile=$_FILES['p_img']['name'];
+        $query="UPDATE users SET user_image='$profile'  WHERE id='$user_id' ";
+        $query_run=mysqli_query($conn,$query);
+        if($query_run){
+            move_uploaded_file($_FILES["p_img"]["tmp_name"],"user_images/".$_FILES["p_img"]["name"]);
+            $_SESSION['status']=" sucess";
+            header("Location: Profile.php");
+        }
+        else{
+            $_SESSION['status']=" Faile to upload Profile";
+            header("Location: Profile.php");
+        }
+*/
+    }
 
 
 
