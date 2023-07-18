@@ -124,7 +124,7 @@ if(isset($_POST['submitplaces'])){
     $p_latitude=$_POST['p_latitude'];
  
     
-    $p_img=$_FILES['p_img']['name'];
+   
 
 
 
@@ -166,6 +166,5 @@ if(isset($_POST['submitplaces'])){
 
 
 
-
-
+    
 ?>

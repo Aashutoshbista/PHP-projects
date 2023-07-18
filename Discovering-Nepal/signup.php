@@ -33,6 +33,21 @@ session_start();
                     
                 
                 <div class="card my-5 col-md-7 box">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="Element">
+                                                                    <strong>Hey!
+                                                                    <?php
+                                                                        if(isset($_SESSION['status']))
+                                                                            {
+                                                                                    echo $_SESSION['status'];
+                                                                                    unset($_SESSION['status']);
+                                                                            }
+                                                                
+                                                                ?>
+                                                        </strong>
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                        </div>
                
                         <div class="card-header bg-light ">
                             
@@ -341,9 +356,17 @@ session_start();
                 </div>
             </div>
         </div>
-        <script  src="Javascript/signup.js"></script>
         <script>
-                     
+            var element = document.getElementById("Element");
+            function hideElement() {
+      element.style.display = "none";
+    }
+    setTimeout(hideElement, 2000);
+
+
+
+</script>
+<script  src="Javascript/signup.js"></script>                     
 
 </script>
    <!-- Optional JavaScript; choose one of the two! -->

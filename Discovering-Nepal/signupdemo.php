@@ -4,6 +4,19 @@ session_start();
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+    body{
+        background-image: url('Mount-Everest.webp');
+
+    }
+    .box{
+        opacity: 0.65;
+    }
+    .names{
+        font-weight:700;
+    }
+    
+    </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,50 +32,50 @@ session_start();
                 
                     
                 
-                <div class="card my-5 col-md-7">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <strong>Hey!
-                                            <?php
-                                                if(isset($_SESSION['status']))
-                                                    {
-                                                            echo $_SESSION['status'];
-                                                            unset($_SESSION['status']);
-                                                    }
-                                        
-                                        ?>
-                                </strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                </div>
+                <div class="card my-5 col-md-7 box">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="Element">
+                                                                    <strong>Hey!
+                                                                    <?php
+                                                                        if(isset($_SESSION['status']))
+                                                                            {
+                                                                                    echo $_SESSION['status'];
+                                                                                    unset($_SESSION['status']);
+                                                                            }
+                                                                
+                                                                ?>
+                                                        </strong>
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                        </div>
+               
                         <div class="card-header bg-light ">
                             
-                            <form action="process.php" method="POST" autocomplete="off" id="form" >
+                            <form action="process.php" method="POST" autocomplete="off" name="myform" >
                                 <!---->
                                         <div id="step1"  >
                                         <h2 class="text-center">Sign Up</h2>
-                                                <div class="form-group">
-                                                            <label for="">Name</label>
-                                                            <input type="text" name="name" id="name" class="form-control" placeholder="Name">
-                                                            <div id="" class="text-danger" style="display:none;">Error Message</div>
+                                                <div class="form-group" id="name">
+                                                            <label class="names" for="">Name:</label>
+                                                            <input type="text" name="name" class="form-control" placeholder="Name">
+                                                            <span class="forerror text-danger" ></span>
                                 
                                                 </div>
-                                                
-                                                <div class="form-group">
-                                                            <label for="">Email:</label>
-                                                            <input type="text" name="email" id="email" class="form-control" placeholder="Email">
-                                                            <div id="" class="text-danger" style="display:none;">Error Message</div>
+                                                <div class="form-group" id="email">
+                                                            <label class="names" for="">Email:</label>
+                                                            <input type="text" name="email" class="form-control" placeholder="Email">
+                                                            <span class="forerror text-danger" ></span>
                                                 </div>
-                                                <div class="form-group">
-                                                            <label for="">Phone::</label>
-                                                            <input type="text" name="phone" id="phone" class="form-control" placeholder="phone">
-                                                            <div id="" class="text-danger" style="display:none;">Error Message</div>
+                                                <div class="form-group" id="phone">
+                                                            <label class="names" for="">Phone:</label>
+                                                            <input type="text" name="phone" class="form-control" placeholder="phone">
+                                                            <span class="forerror text-danger" ></span>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" id="age">
                                                             <div class="">
-                                                            <label for="">Age:</label>
-                                                            <input type="text" name="age" id="age" class="form-control" placeholder="Age">
-                                                            <div id="" class="text-danger" style="display:none;">Error Message</div>
+                                                            <label class="names" for="">Age:</label>
+                                                            <input type="text" name="age" class="form-control" placeholder="Age">
+                                                            <span class="forerror text-danger" ></span>
                                                 </div>
                                         </div>
                                                 <div class="row mt-2">
@@ -70,8 +83,9 @@ session_start();
                                                                             <a href="admin/login.php" class="btn btn-primary ">Log In</a></p>
                                                                 </div>
                                                                 <div class="button-container col">
-                                                                        <button type="button" class="next-button btn btn-success" id="next1" onclick="showStep('step2')">Next</button>
+                                                                        <button type="button" class=" next-button btn btn-success"  onclick=validateForm()>Next</button>
                                                                 </div>
+                                                               <!-- onclick="showStep('step2')"-->
                                                 </div>
                                         </div>
                                         <div id="step2" style="display:none;">
@@ -275,18 +289,18 @@ session_start();
                                                                                         <option value="zambian">Zambian</option>
                                                                                         <option value="zimbabwean">Zimbabwean</option>
                                                                                 </select>
-                                                                                <div id="" class="text-danger" style="display:none;">Error Message</div>
                                                                 </div>
 
-                                                    <div class="form-group">
+                                                    <div class="form-group" id="pass">
                                                                 <label for="">Password:</label>
-                                                                <input type="password" id="pass" name="password" class="form-control" placeholder="Password">
-                                                                <div id="" class="text-danger" style="display:none;">Error Message</div>
+                                                                <input type="password" name="pass"    class="form-control" placeholder="Password">
+                                                                <span class="forerror text-danger" ></span>
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div class="form-group" id="repass" >
+
                                                                 <label for="">Re-Enter Password:</label>
-                                                                <input type="password" id="repass"name="password" class="form-control" placeholder="Re-Enter password">
-                                                                <div id="" class="text-danger" style="display:none;">Error Message</div>
+                                                                <input type="password" name="repass" class="form-control" placeholder="Re-Enter password">
+                                                                <span class="forerror text-danger" ></span>
                                                     </div>
                                                     
                                                     <div class="button-container">
@@ -295,7 +309,7 @@ session_start();
                                                                                             <button type="button" class="next-button btn btn-dark "  onclick="showStep('step1')">Previous</button>
                                                                             </div>
                                                                             <div class="col">
-                                                                                        <button type="button" class="next-button btn btn-success"  onclick="showStep('step3')">Next</button>
+                                                                                        <button type="button" class="next-button btn btn-success"  onclick=validatesecondForm()>Next</button>
                                                                             </div>                                            
                                                                 </div>
                                                     </div>
@@ -337,60 +351,22 @@ session_start();
                                                     </div>
                                         </div>
 </form>
-                    
+                        
                         </div>
                 </div>
             </div>
         </div>
-    <script src="Javascript/validate.js"></script>
-
         <script>
-                        function showStep(step) {
-                        if (step === 'step1') {
-                            document.getElementById('step1').style.display = 'block';
-                            document.getElementById('step2').style.display = 'none';
-                            
-                        }else if(step === 'step2'){
-                            document.getElementById('step1').style.display = 'none';
-                            document.getElementById('step2').style.display = 'block';
-                            document.getElementById('step3').style.display = 'none';
-                          
+            var element = document.getElementById("Element");
+            function hideElement() {
+      element.style.display = "none";
+    }
+    setTimeout(hideElement, 2000);
 
-                        } 
-                        else if(step === 'step3') {
-                            document.getElementById('step1').style.display = 'none';
-                            
-                            document.getElementById('step2').style.display = 'none';
-                            document.getElementById('step3').style.display = 'block';
-                        }
-                        }
 
-                        function validateEmail() {
-                        // Email validation logic
-                        return true;
-                        }
 
-                    function limitCheckboxSelection() {
-                    var checkboxes = document.querySelectorAll('input[type="checkbox"][name="interests[]"]');
-                    var checkedCount = 0;
-                    for (var i = 0; i < checkboxes.length; i++) {
-                        if (checkboxes[i].checked) {
-                        checkedCount++;
-                        }
-                    }
-                    if (checkedCount >= 3) {
-                        for (var i = 0; i < checkboxes.length; i++) {
-                        if (!checkboxes[i].checked) {
-                            checkboxes[i].disabled = true;
-                        }
-                        }
-                    } else {
-                        for (var i = 0; i < checkboxes.length; i++) {
-                        checkboxes[i].disabled = false;
-                        }
-                    }
-                    }
-                
+</script>
+<script  src="Javascript/signup.js"></script>                     
 
 </script>
    <!-- Optional JavaScript; choose one of the two! -->

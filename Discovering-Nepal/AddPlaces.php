@@ -77,12 +77,7 @@ include("database.php");
                                                             
                                                             <!--Image-->
                                                             </div>
-                                                            <div class="col">
-                                                                    <div class="form-group mt-2">
-                                                                <label for="">Images</label></br>
-                                                                <input type="file" accept=".png ,.jpg,.jpng" class="Place_image" name="p_img">
-                                                                <img id="image" src="" width="100px"/>
-                                                            </div>
+                                                            
                                                                     </div>
                                                             <!--End of image-->
                                                                     </div>
