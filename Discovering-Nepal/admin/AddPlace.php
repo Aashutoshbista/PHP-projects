@@ -115,7 +115,7 @@ include("config/dbcon.php");
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="">Images</label>
-                                                                <input type="file" accept=".png ,.jpg,.jpng" class="Place_image" name="p_img">
+                                                                <input type="file" accept=".png ,.jpg,.jpng" class="Place_image" name="p_img[]" multiple>
                                                                 <img id="image" src="" width="100px"/>
                                                             </div>
                                                             <div class="form-group" id=" p_longitude">

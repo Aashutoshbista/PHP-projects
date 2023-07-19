@@ -55,7 +55,7 @@ include('header.php');
                                       
                                     }
                                 </script>
-                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtbzarTMw_16HlOy-duoMrIaB2DYqWzRQ&callback=initMap">
+                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0M-UwBtxishqPfQVym_g369dW3MQk3Ys&callback=initMap">
 
                                 </script><?php
                                  if(isset($_POST['submitsearch'])){

@@ -3,6 +3,12 @@ include('authentication.php');
 include('config/dbcon.php');
 
 /*here is code for to add books */
+/*
+ $query="INSERT INTO places(p_name,p_longitude,p_latitude,p_discription,p_image,p_catagory,p_prov,p_type) 
+ VALUES('$name','$p_longitude','$p_latitude','$$p_description','$$dataofimg','$dataofcat','$p_prov','$p_type')";
+ $query_run=mysqli_query($conn,$query);
+ */
+/*
 if(isset($_POST['submit'])){
     $name=$_POST['p_name'];
     $p_prov=$_POST['provinces'];
@@ -15,16 +21,23 @@ if(isset($_POST['submit'])){
     
     
     
-    $p_img=$_FILES['p_img']['name'];
+    $fileCount=count($_FILES['p_img']['name']);
+    $dataofimg=array();
+    for ($i = 0; $i < $fileCount; $i++) {
+        $p_img = $_FILES['p_img']['name'][$i];
+        $dataofimg[] = $p_img;
+    }
+    $dataofimg = implode(",", $dataofimg);
 
 
-
- $query="INSERT INTO places(p_name,p_longitude,p_latitude,p_discription,p_image,p_catagory,p_prov,p_type) 
- VALUES('$name','$p_longitude','$p_latitude','$$p_description','$p_img','$dataofcat','$p_prov','$p_type')";
+for ($i = 0; $i < $fileCount; $i++) {
+    $query = "INSERT INTO places (p_name, p_longitude, p_latitude, p_discription, p_image, p_catagory, p_prov, p_type) 
+            VALUES ('$name', '$p_longitude', '$p_latitude', '$p_description', '$dataofimg[$i]', '$dataofcat', '$p_prov', '$p_type')";
  $query_run=mysqli_query($conn,$query);
  if($query_run){
-     move_uploaded_file($_FILES["p_img"]["tmp_name"],"images/".$_FILES["p_img"]["name"]);
-     $_SESSION['status']=" sucess";
+  //   move_uploaded_file($_FILES["p_img"]["tmp_name"][$i],"images/".$_FILES["p_img"]["name"]);
+    move_uploaded_file($_FILES["p_img"]["tmp_name"][$i],"images/".$dataofimg[$i]);
+  $_SESSION['status']=" sucess";
      header("Location: AddPlace.php");
      }
      else
@@ -34,6 +47,57 @@ if(isset($_POST['submit'])){
      }
  
     }
+}*/
+if (isset($_POST['submit'])) {
+    // Retrieve other form data
+    $name = $_POST['p_name'];
+    $p_prov = $_POST['provinces'];
+    $p_longitude = $_POST['p_longitude'];
+    $p_description = $_POST['p_description'];
+    $p_latitude = $_POST['p_latitude'];
+    $p_cat = $_POST['catagory'];
+    $dataofcat = implode(",", $p_cat);
+    $p_type = $_POST['type'];
+
+    // Perform database insert for place information first
+    $query = "INSERT INTO places (p_name, p_longitude, p_latitude, p_discription, p_catagory, p_prov, p_type) 
+            VALUES ('$name', '$p_longitude', '$p_latitude', '$p_description', '$dataofcat', '$p_prov', '$p_type')";
+
+    if (mysqli_query($conn, $query)) {
+        $placeId = mysqli_insert_id($conn); // Get the auto-generated ID of the last inserted place
+    } else {
+        $_SESSION['status'] = "failed";
+        header("Location: AddPlace.php");
+        exit();
+    }
+
+    // Retrieve the uploaded files
+    $fileCount = count($_FILES['p_img']['name']);
+
+    // Perform database insert for each file separately
+    for ($i = 0; $i < $fileCount; $i++) {
+        $p_img = $_FILES['p_img']['name'][$i];
+
+        // Move the uploaded file to the destination folder
+        $uploadDir = "images/";
+        $destination = $uploadDir . $p_img;
+        move_uploaded_file($_FILES["p_img"]["tmp_name"][$i], $destination);
+
+        // Perform database insert for each image
+        $query = "INSERT INTO images (place_id, image_name) VALUES ('$placeId', '$p_img')";
+
+        if (!mysqli_query($conn, $query)) {
+            $_SESSION['status'] = "failed";
+            header("Location: AddPlace.php");
+            exit();
+        }
+    }
+
+    $_SESSION['status'] = "success";
+    header("Location: AddPlace.php");
+}
+
+
 /*delete product code  */
 
 if(isset($_POST['Deleteplace']))
