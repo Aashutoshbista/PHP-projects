@@ -4,8 +4,8 @@ include('database.php');?>
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+     <!-- Required meta tags -->
+     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="index1.css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -130,8 +130,8 @@ include('database.php');?>
 
 
 
-            <form action="index.php" class="d-flex" method="POST">
-              <input class="form-control me-2" type="text" name="searchinput" placeholder="Search" aria-label="Search">
+            <form action="searchr.php" class="d-flex" method="POST">
+              <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" name="submitsearch"type="submit">Search</button>
             </form>
            

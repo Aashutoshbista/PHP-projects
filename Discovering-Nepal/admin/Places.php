@@ -63,7 +63,7 @@ include("config/dbcon.php");
                                                     <th>Longitude</th>
                                                     <th>Latitude</th>
                                                     <th>Provinence</th>
-                                                    <th>Image</th>
+                                                   <!-- <th>Image</th>-->
                                                     
                                                     
                                                         
@@ -87,9 +87,9 @@ include("config/dbcon.php");
                                                                                         <td><?php echo $row['p_longitude'];  ?></td>
                                                                                         <td><?php echo $row['p_latitude']; ?></td>
                                                                                         <td><?php echo $row['p_prov']; ?></td>
-                                                                                        <td>
-                                                                                            <img src="<?php echo"images/". $row['p_image']; ?>" alt="img" width="70px">
-                                                                                        </td>
+                                                                                       <!-- <td>
+                                                                                            <img src="<?php/* echo"images/". $row['p_image'];*/ ?>" alt="img" width="70px">
+                                                                                        </td>-->
                                                                                        
                                                                                         <td>
                                                                                             
