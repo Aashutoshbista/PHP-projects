@@ -4,114 +4,160 @@ include('database.php');
 include('header.php');
 
 
-
-
 $searchErr = '';
 $Destinations = '';
-//for rating 
+    
 
+ 
 
-
-
-if (isset($_POST['submitsearch'])) {
-    if (!empty($_POST['search'])) {
-        $search = $_POST['search'];
-        
-        
-
-        // Assuming $conn is the mysqli connection object
-        $stmt = $conn->prepare("SELECT * FROM places WHERE p_name LIKE ? OR p_name LIKE ?");
-        $searchTerm = "%$search%"; // Prepare the search term with wildcards
-        $stmt->bind_param("ss", $searchTerm, $searchTerm); // Bind the parameters to the prepared statement
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        // Fetch rows from the result set
-        $Destinations = array();
-        while ($row = $result->fetch_assoc()) {
-            $Destinations[] = $row;
+    if (isset($_POST['submitsearch'])) {
+        if (!empty($_POST['search'])) {
+            $search = $_POST['search'];
+            
+            
+    
+            // Assuming $conn is the mysqli connection object
+            $stmt = $conn->prepare("SELECT * FROM places WHERE p_name LIKE ? OR p_name LIKE ?");
+            $searchTerm = "%$search%"; // Prepare the search term with wildcards
+            $stmt->bind_param("ss", $searchTerm, $searchTerm); // Bind the parameters to the prepared statement
+            $stmt->execute();
+            $result = $stmt->get_result();
+    
+            // Fetch rows from the result set
+            $Destinations = array();
+            while ($row = $result->fetch_assoc()) {
+                $Destinations[] = $row;
+            }
+    
+            // Free the result set and close the statement
+            $result->free();
+            $stmt->close();
+        } else {
+            $searchErr = "Please enter the information";
         }
-
-        // Free the result set and close the statement
-        $result->free();
-        $stmt->close();
-    } else {
-        $searchErr = "Please enter the information";
     }
-}
-
-
-
-
-function displayPosts($userid, $conn,$postiD,$place)
-{
-    $output = '';
-    $postid = $postiD;
-    $place = $place;
-    //$query = "SELECT * FROM places";
-    //$result = mysqli_query($conn, $query);
-
-    //while ($row = mysqli_fetch_array($result)) {
-        //$postid = $row['p_id'];
-       // $title = $row['p_name'];
-        //$content = $row['p_discription'];
-        $type = -1;
-
-        // Checking user status
-        $status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
-        $status_result = mysqli_query($conn, $status_query);
-        $status_row = mysqli_fetch_array($status_result);
-        $count_status = $status_row['cntStatus'];
-        if ($count_status > 0) {
-            $type = $status_row['type'];
+    
+    
+    if (isset($_POST['save'])) {
+        $uID = $conn->real_escape_string($_POST['uID']);
+        $ratedIndex = $conn->real_escape_string($_POST['ratedIndex']);
+        $ratedIndex++;
+    
+        if (!$uID) {
+            $conn->query("INSERT INTO stars (rateIndex) VALUES ('$ratedIndex')");
+            $sql = $conn->query("SELECT id FROM stars ORDER BY id DESC LIMIT 1");
+            $uData = $sql->fetch_assoc();
+            $uID = $uData['id'];
+        } else
+            $conn->query("UPDATE stars SET rateIndex='$ratedIndex' WHERE id='$uID'");
+    
+        exit(json_encode(array('id' => $uID)));
+    }
+    
+    $sql = $conn->query("SELECT id FROM stars");
+    $numR = $sql->num_rows;
+    
+    $sql = $conn->query("SELECT SUM(rateIndex) AS total FROM stars");
+    $rData = $sql->fetch_array();
+    $total = $rData['total'];
+    
+    $avg = $total / $numR;
+    if (isset($_POST['submitsearch'])) {
+        if (!empty($_POST['search'])) {
+            $search = $_POST['search'];
+            
+            
+    
+            // Assuming $conn is the mysqli connection object
+            $stmt = $conn->prepare("SELECT * FROM places WHERE p_name LIKE ? OR p_name LIKE ?");
+            $searchTerm = "%$search%"; // Prepare the search term with wildcards
+            $stmt->bind_param("ss", $searchTerm, $searchTerm); // Bind the parameters to the prepared statement
+            $stmt->execute();
+            $result = $stmt->get_result();
+    
+            // Fetch rows from the result set
+            $Destinations = array();
+            while ($row = $result->fetch_assoc()) {
+                $Destinations[] = $row;
+            }
+    
+            // Free the result set and close the statement
+            $result->free();
+            $stmt->close();
+        } else {
+            $searchErr = "Please enter the information";
         }
+    }
+    
+    
+    
+    
+    function displayPosts($userid, $conn,$postiD,$place)
+    {
+        $output = '';
+        $postid = $postiD;
+        $place = $place;
+        //$query = "SELECT * FROM places";
+        //$result = mysqli_query($conn, $query);
+    
+        //while ($row = mysqli_fetch_array($result)) {
+            //$postid = $row['p_id'];
+           // $title = $row['p_name'];
+            //$content = $row['p_discription'];
+            $type = -1;
+    
+            // Checking user status
+            $status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+            $status_result = mysqli_query($conn, $status_query);
+            $status_row = mysqli_fetch_array($status_result);
+            $count_status = $status_row['cntStatus'];
+            if ($count_status > 0) {
+                $type = $status_row['type'];
+            }
+    
+            // Count post total likes and unlikes
+            $like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
+            $like_result = mysqli_query($conn, $like_query);
+            $like_row = mysqli_fetch_array($like_result);
+            $total_likes = $like_row['cntLikes'];
+    
+            $unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
+            $unlike_result = mysqli_query($conn, $unlike_query);
+            $unlike_row = mysqli_fetch_array($unlike_result);
+            $total_unlikes = $unlike_row['cntUnlikes'];
+    
+            // Build HTML output
+            /*$output .= '<div class="post">';
+            $output .= '<h2>'.$title.'</h2>';
+            $output .= '<div class="post-text">'.$content.'</div>';
+            $output .= '<div class="post-action">';*/
+            $output .= '<input type="button" value="Like" id="like_'.$postid.'" class="like" style="'.($type == 1 ? "color: #ffa449;" : "").'" /> <i id= "like_'.$postid.'_icon" style="'.($type == 1 ? "color: #ffa449;" : "").'" class="fa">&#xf087;</i>&nbsp;(<span id="likes_'.$postid.'">'.$total_likes.'</span>)&nbsp;';
+    
+    
+            $output .= '<input type="button" value="Dislike" id="unlike_'.$postid.'" class="unlike" style="'.($type == 0 ? "color: #ffa449;" : "").'" /><i id= "unlike_'.$postid.'_icon" style="'.($type == 1 ? "color: #ffa449;" : "").'" class="fa">&#xf165;</i>&nbsp;(<span id="unlikes_'.$postid.'">'.$total_unlikes.'</span>)';
+            $output .= '</div>';
+            $output .= '</div>';
+        //}
+    
+        return $output;
+    }
+    
+    
+    ?>
 
-        // Count post total likes and unlikes
-        $like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
-        $like_result = mysqli_query($conn, $like_query);
-        $like_row = mysqli_fetch_array($like_result);
-        $total_likes = $like_row['cntLikes'];
-
-        $unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
-        $unlike_result = mysqli_query($conn, $unlike_query);
-        $unlike_row = mysqli_fetch_array($unlike_result);
-        $total_unlikes = $unlike_row['cntUnlikes'];
-
-        // Build HTML output
-        /*$output .= '<div class="post">';
-        $output .= '<h2>'.$title.'</h2>';
-        $output .= '<div class="post-text">'.$content.'</div>';
-        $output .= '<div class="post-action">';*/
-        $output .= '<input type="button" value="Like" id="like_'.$postid.'" class="like" style="'.($type == 1 ? "color: #ffa449;" : "").'" /> <i id= "like_'.$postid.'_icon" style="'.($type == 1 ? "color: #ffa449;" : "").'" class="fa">&#xf087;</i>&nbsp;(<span id="likes_'.$postid.'">'.$total_likes.'</span>)&nbsp;';
-
-
-        $output .= '<input type="button" value="Dislike" id="unlike_'.$postid.'" class="unlike" style="'.($type == 0 ? "color: #ffa449;" : "").'" /><i id= "unlike_'.$postid.'_icon" style="'.($type == 1 ? "color: #ffa449;" : "").'" class="fa">&#xf165;</i>&nbsp;(<span id="unlikes_'.$postid.'">'.$total_unlikes.'</span>)';
-        $output .= '</div>';
-        $output .= '</div>';
-    //}
-
-    return $output;
-}
-
-
-?>
-<html>
-    <head>
-        <title>Places</title>
-
-        <!-- CSS -->
-        <link href="ratingstyle.css" type="text/css" rel="stylesheet" />
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-        <link href='jquery-bar-rating-master/dist/themes/fontawesome-stars.css' rel='stylesheet' type='text/css'>
-        
-        <!-- Script -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="jquery-bar-rating-master/dist/jquery.barrating.min.js" type="text/javascript"></script>
-        
-    </head>
-    <body>
-<link href="ratingstyle.css" type="text/css" rel="stylesheet" />
-                <div class="container">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rating System</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+    
+<div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -160,55 +206,21 @@ function displayPosts($userid, $conn,$postiD,$place)
                                                                             <div class="col mt-1">
                                                                             <h6 class="d-inline float-left"><?php echo $value['p_name'];  ?></h6>
                                                                             </div>
-                                                                            <?php
-                                                                           $userid = $_SESSION['auth_user']['user_id'];
-
-                                                                           $query = "SELECT * FROM post_rating WHERE placeid={$value['p_id']} AND userid={$userid}";
-                                                                           $userresult = mysqli_query($conn, $query) or die(mysqli_error());
-                                                                           
-                                                                           if (mysqli_num_rows($userresult) > 0) {
-                                                                               // Rating is available for this user and place
-                                                                               $fetchRating = mysqli_fetch_array($userresult);
-                                                                               $rating = $fetchRating['rating'];
-                                                                                } else {
-                                                                                    // No rating found for this user and place
-                                                                                    $rating = null; // Set the user's rating to null
-                                                                                }
-
-                                                                                // get average
-                                                                              // Assuming $value['p_id'] contains the place ID
-                                                                              $placeid=$value['p_id'];
-
-                                                                                    $query = "SELECT ROUND(AVG(rating),1) as averageRating FROM post_rating WHERE placeid={$value['p_id']}";
-                                                                                    $avgresult = mysqli_query($conn, $query) or die(mysqli_error());
-                                                                                    $fetchAverage = mysqli_fetch_array($avgresult);
-                                                                                    $averageRating = $fetchAverage['averageRating'];
-
-                                                                                    if ($averageRating <= 0) {
-                                                                                        $averageRating = "No rating yet.";
-                                                                                    }
-                                                                                    ?>
                                                                             </div>
                                                                             <div class="row  mt-3 ml-2">
                                                                               <div class="col-md-2"><h5>Rating:<h5></div>
-                                                                              <div class="col-md-6 " id='rating_<?php echo $placeid; ?>' data-id='rating_<?php echo $placeid; ?>'>  
+                                                                              <div class="col-md-6 "> 
 
                                                                              
-                                                                                <!--  <i class="fa fa-star bg-dark fa-2x" data-index="0"></i>
+                                                                                  <i class="fa fa-star bg-dark fa-2x" data-index="0"></i>
                                                                                   <i class="fa fa-star bg-dark fa-2x" data-index="1"></i>
                                                                                   <i class="fa fa-star bg-dark fa-2x" data-index="2"></i>
                                                                                   <i class="fa fa-star bg-dark fa-2x" data-index="3"></i>
-                                                                                  <i class="fa fa-star bg-dark fa-2x" data-index="4"></i>-->
-                                                                                   Average Rating : <span id='avgrating_<?php echo $placeid; ?>'><?php echo $averageRating; ?></span>
-                                                                                  <?php// echo round($avg,2) ?>
+                                                                                  <i class="fa fa-star bg-dark fa-2x" data-index="4"></i>
+                                                                                  <?php echo round($avg,2) ?>
                                                                                   <br><br>
                                                                                   
-                                                                                  <script type='text/javascript'>
-                                                                                                
-                                                                                                $(document).ready(function(){
-                                $('#rating_<?php echo $placeid; ?>').barrating('set',<?php echo $rating; ?>);
-                            });
-                                                                                                </script>
+                                                                              
 
                                                                               </div>
                                                                               <div class="col"></div>
@@ -296,13 +308,66 @@ function displayPosts($userid, $conn,$postiD,$place)
 </div>
   </div>
 </div>
-<!--for rating system-->
+
+    <script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script>
+        var ratedIndex = -1, uID = 0;
+
+        $(document).ready(function () {
+            resetStarColors();
+
+            if (localStorage.getItem('ratedIndex') != null) {
+                setStars(parseInt(localStorage.getItem('ratedIndex')));
+                uID = localStorage.getItem('uID');
+            }
+
+            $('.fa-star').on('click', function () {
+               ratedIndex = parseInt($(this).data('index'));
+               localStorage.setItem('ratedIndex', ratedIndex);
+               saveToTheDB();
+            });
+
+            $('.fa-star').mouseover(function () {
+                resetStarColors();
+                var currentIndex = parseInt($(this).data('index'));
+                setStars(currentIndex);
+            });
+
+            $('.fa-star').mouseleave(function () {
+                resetStarColors();
+
+                if (ratedIndex != -1)
+                    setStars(ratedIndex);
+            });
+        });
+
+        function saveToTheDB() {
+            $.ajax({
+               url: "index.php",
+               method: "POST",
+               dataType: 'json',
+               data: {
+                   save: 1,
+                   uID: uID,
+                   ratedIndex: ratedIndex
+               }, success: function (r) {
+                    uID = r.id;
+                    localStorage.setItem('uID', uID);
+               }
+            });
+        }
+
+        function setStars(max) {
+            for (var i=0; i <= max; i++)
+                $('.fa-star:eq('+i+')').css('color', 'green');
+        }
+
+        function resetStarColors() {
+            $('.fa-star').css('color', 'white');
+        }
 
 
-    </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></>
-<script>
-$(document).ready(function(){
+        $(document).ready(function(){
  
  $('#comment_form').on('submit', function(event){
   event.preventDefault();
@@ -355,77 +420,6 @@ $(document).ready(function(){
  });
  
 });
-</script>
-<script>
-
-
-// For like and unlike
-    $(document).ready(function(){
-      // like and unlike click
-      $(".like, .unlike").click(function(){
-        // Rest of your JavaScript code
-        // ...
-
-        var id = this.id;   // Getting Button id
-        var split_id = id.split("_");
-
-        var text = split_id[0];
-        var postid = split_id[1];  // postid
-
-        var places = <?php echo json_encode($destination); ?>;
-
-        // Finding click type
-        var type = 0;
-        if(text == "like"){
-            type = 1;
-        }else{
-            type = 0;
-        }
-
-        // AJAX Request
-        $.ajax({
-            url: 'likeunlike.php',
-            type: 'post',
-            data: {postid:postid,type:type,places:places},
-            dataType: 'json',
-            success: function(data){
-                var likes = data['likes'];
-                var unlikes = data['unlikes'];
-
-                $("#likes_"+postid).text(likes);        // setting likes
-                $("#unlikes_"+postid).text(unlikes);    // setting unlikes
-
-                if(type == 1){
-                    $("#like_"+postid).css("color","#ffa449");
-                    $("#unlike_"+postid).css("color","lightseagreen");
-                    $("#like_"+postid+ "_icon").css("color","#ffa449");
-                    $("#unlike_"+postid+ "_icon").css("color","lightseagreen");
-                }
-
-                if(type == 0){
-                    $("#unlike_"+postid).css("color","#ffa449");
-                    $("#like_"+postid).css("color","lightseagreen");
-                    $("#unlike_"+postid+ "_icon").css("color","#ffa449");
-                    $("#like_"+postid+ "_icon").css("color","lightseagreen");
-                }
-
-
-            }
-            
-        });
-      });
-    });
-  </script>
-<?php
-include('footer.php');
-?>
-
-
-
-
-<?php
-include('footer.php');
-?>
-
-
-
+    </script>
+</body>
+</html>

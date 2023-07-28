@@ -320,23 +320,19 @@ session_start();
                                             <label>Preferences and Interests:</label>
                                                     <div class="checkboxes" required>
                                                     <div class="row">
-                                                    <div class="col-md-4">  <label><input type="checkbox" name="Tags[]" value="Cultural Heritages" onclick="limitCheckboxSelection()"> Cultural Heritages</label></div>
-                                                   <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="Lakes" onclick="limitCheckboxSelection()"> Lakes</label></div>
+                                                    <div class="col-md-4">  <label><input type="checkbox" name="Tags[]" value="Historical and Cultural Sites" onclick="limitCheckboxSelection()"> Historical and Cultural Sites</label></div>
+                                                   <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="Religious and Pilgrimage Sites" onclick="limitCheckboxSelection()"> Religious and Pilgrimage Sites</label></div>
 
-                                                       <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="National Parks" onclick="limitCheckboxSelection()"> National Parks</label></div>
+                                                       <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="Hill Stations and View Towers" onclick="limitCheckboxSelection()"> Hill Stations and View Towers</label></div>
                                                 </div>
                                                 <div class="row">
-                                                <div class="col-md-4">      <label><input type="checkbox" name="Tags[]" value="Temples" onclick="limitCheckboxSelection()"> Temples</label></div>
-                                                <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="Trekking and Hiking" onclick="limitCheckboxSelection()"> Trekking and Hiking</label></div>
+                                                <div class="col-md-4">      <label><input type="checkbox" name="Tags[]" value="Trekking and Hiking Trails" onclick="limitCheckboxSelection()"> Trekking and Hiking Trails</label></div>
+                                                <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="Lakes, Rivers and Water Bodies" onclick="limitCheckboxSelection()"> Trekking and Hiking</label></div>
                                                             
-                                                <div class="col-md-4">   <label><input type="checkbox" name="Tags[]" value="Adventure Sports" onclick="limitCheckboxSelection()"> Adventure Sports</label></div>
+                                                <div class="col-md-4">   <label><input type="checkbox" name="Tags[]" value="Natural Landscapes" onclick="limitCheckboxSelection()"> Natural Landscapes</label></div>
 
                                                 </div>
-                                                <div class="row">
-                                                <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="Religious and Spiritual Sites" onclick="limitCheckboxSelection()"> Religious and Spiritual Sites</label></div>
-                                                <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="HillStation" onclick="limitCheckboxSelection()"> HillStation</label></div>
-                                                <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="Valleys" onclick="limitCheckboxSelection()"> Valleys</label></div>
-                                                    </div>
+                                                
 
                                                 </div>
                                                     <div class="button-container">

@@ -23,10 +23,45 @@ include('database.php');
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/e5823df915.js" crossorigin="anonymous"></script>
     <!--like and dislike added-->
-    
+    <script type="text/javascript">
+        $(function() {
+            $('.rating').barrating({
+                theme: 'fontawesome-stars',
+                onSelect: function(value, text, event) {
+
+                    // Get element id by data-id attribute
+                    var el = this;
+                    var el_id = el.$elem.data('id');
+
+                    // rating was selected by a user
+                    if (typeof(event) !== 'undefined') {
+                        
+                        var split_id = el_id.split("_");
+
+                        var placeid= split_id[1];  // postid
+
+                        // AJAX Request
+                        $.ajax({
+                            url: 'rating_ajax.php',
+                            type: 'post',
+                            data: {placeid:placeid,rating:value},
+                            dataType: 'json',
+                            success: function(data){
+                                // Update average
+                                var average = data['averageRating'];
+                                $('#avgrating_'+placeid).text(average);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+      </script>
     <style>
       body{
         overflow-x: hidden;
@@ -46,8 +81,6 @@ include('database.php');
       width:100%; /* Adjust the width as needed */
       /* Additional styling for the navbar brand */
   }
- 
-     
     </style>
 </head>
     
@@ -203,7 +236,35 @@ include('database.php');
                                   <ul class="postcard__tagbox">
                                     <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
                                     <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
-                                    <li class="tag__item play yellow">
+                                    <!--rating the post-->
+                                    <div class="post-action">
+                                                <!-- Rating -->
+                                                <!-- <select class='rating' id='rating_<?php/* echo $placeid; */?>' data-id='rating_<?php/* echo $placeid;*/ ?>'>
+                                                        <option value="1" >1</option>
+                                                        <option value="2" >2</option>
+                                                        <option value="3" >3</option>
+                                                        <option value="4" >4</option>
+                                                        <option value="5" >5</option>
+                                                    </select>-->
+                                               <div class='rating' id='rating_<?php echo $placeid; ?>' data-id='rating_<?php echo $placeid; ?>'>
+                                                <span class="fa fa-star checked" value="1"></span>
+                                                    <span class="fa fa-star checked" value="2"></span>
+                                                    <span class="fa fa-star checked" value="3"></span>
+                                                    <span class="fa fa-star" value="4"></span>
+                                                    <span class="fa fa-star" value="5"></span>
+                                                </div>
+                                                <div style='clear: both;'></div>
+                                                Average Rating :<!-- <span id='avgrating_<?php  /*echo $placeid;*/ ?>'><?php /*echo $averageRating; */?></span>-->
+
+                                                <!-- Set rating -->
+                                                <script type='text/javascript'>
+                                                $(document).ready(function(){
+                                                    $('#rating_<?php echo $placeid; ?>').barrating('set',<?php echo $rating; ?>);
+                                                });
+                                                
+                                                </script>
+                                     </div>
+                                    <!--rating the post-->
                                     </div>
                                     </div>
                                     <div class="row" id="demo">
@@ -304,6 +365,9 @@ include('database.php');
 
 </body>
 <script>
+  $(function () {
+  $('[data-toggle="popover"]').popover()
+})
               
               var map;
               var markers = [];

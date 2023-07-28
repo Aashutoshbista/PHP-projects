@@ -24,14 +24,17 @@ function validateForm(){
     var age=document.forms['myform']["age"].value;
     var phone=document.forms['myform']["phone"].value;
     if (name.length === 0) {
-        seterror("name","Name field cannot be empty");
-        returnval=false;
-    }else if(!/^[A-Za-z]+$/.test(name)){
-        seterror("name","Name field must contain alphabetical characters ");
-        returnval=false;
-    }else if(name.length <4){
-        seterror("name","Length of the name is too short");
-        returnval=false;
+        seterror("name", "Name field cannot be empty");
+        returnval = false;
+    }else if (!/^[A-Za-z\s]+$/.test(name)) {
+        console.log(name); // Output the name to the console for debugging
+        seterror("name", "Name field must contain alphabetical characters");
+        returnval = false;
+    } else if (name.length < 4) {
+        seterror("name", "Length of the name is too short");
+        returnval = false;
+    
+    
     }else if(email.length=== 0 ){
         seterror("email","Email field cannot be Empty");
         returnval=false;
@@ -122,14 +125,14 @@ function showStep(step) {
     }
 
 function limitCheckboxSelection() {
-var checkboxes = document.querySelectorAll('input[type="checkbox"][name="interests[]"]');
+var checkboxes = document.querySelectorAll('input[type="checkbox"][name="Tags[]"]');
 var checkedCount = 0;
 for (var i = 0; i < checkboxes.length; i++) {
     if (checkboxes[i].checked) {
     checkedCount++;
     }
 }
-if (checkedCount >= 3) {
+if (checkedCount >= 2) {
     for (var i = 0; i < checkboxes.length; i++) {
     if (!checkboxes[i].checked) {
         checkboxes[i].disabled = true;
