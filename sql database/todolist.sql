@@ -72,8 +72,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `status`, `verificationcode`, `verify_status`) VALUES
-(2, 'Aashutosh', 'aashutoshbista717@gmail.com', '1235', 1, '7054c6635e2ac3d0718eb71d6bbf0e23', 1),
-(3, 'Aashutosh Bista', 'firefist972@gmail.com', '12345', 1, '7d077d50dff41981c9e437fb3f67fe4b', 0);
+
 
 --
 -- Indexes for dumped tables
