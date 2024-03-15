@@ -33,7 +33,7 @@ include "../database.php";
                 <textarea class="form-control" placeholder="" name="task" id="floatingTextarea"></textarea>
                 <label for="floatingTextarea">Add your Task</label>
                 </div> 
-                <div class="form-floating">
+               <!--  <div class="form-floating">
                   <div class="date">
                     
                   </div>
@@ -41,7 +41,7 @@ include "../database.php";
 
                   </div>
 
-                </div>
+                </div> -->
                 <!-- Text area  -->   
 
       </div>
