@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.navbar{
+    display: flex;
+    justify-content: center;
+    
+}
+.navlink{
+    font-size: 1.5rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+.hea{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
+    padding-left: 30px;
+}
+.heading{
+    font-family: 'Courier New', Courier, monospace;
+}
