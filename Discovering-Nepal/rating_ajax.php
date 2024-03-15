@@ -1,8 +1,8 @@
 <?php
 
-include "database.php";
-include('authentication.php');
-include('header.php');
+include "include/database.php";
+include('include/authentication.php');
+include('include/header.php');
 
 $userid = $_SESSION['auth_user']['user_id'] ;;
 $placeid = $_POST['placeid'];

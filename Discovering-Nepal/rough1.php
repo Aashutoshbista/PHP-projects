@@ -1,278 +1,316 @@
+<?php
 
-  
-  <?php
+include "database.php";
 
-function setcomments($conn) {
-    if(isset($_POST['commentSubmit'])){
-        //INsert the data to the database
-        $Name=$_POST['name'];
-        $content=$_POST['msg'];
-        $Date=$_POST['date'];
-        $Uid=$_POST['email'];
-        $book_id=$_POST['book_id'];
+include('header.php');
 
-        $sql="INSERT INTO comments(Uid, submit_date, content, name,bid) 
-        VALUES('$Uid',' $Date','$content','$Name','$book_id')";
-        $result = $conn->query($sql);
-
-        }
-
-
-}
-
-function getComments($conn){
-   
-    $sql="SELECT * FROM comments  WHERE bid=$books_id";
-    $result = $conn->query($sql);
-    
-    while($row=$result->fetch_assoc()){
-       echo" <div class='comment-box text-justify white mt-4 float-right'><p>";
-    echo"<img src='https://i.imgur.com/CFpa3nK.jpg' alt='' class='rounded-circle' width='40' height='40'>";
-    echo $row['name'];echo"-";
-     echo $row['submit_date']."<br><br>";
-
-    
-    echo $row['Uid']."<br><br>";
-    
-    echo nl2br($row['content']);
-echo"</p></div>";
-
-        }
-}
 ?>
- 
-
- <a href="cart.php?books_id=<?php echo $row['books_id'];  ?>" class="btn btn-primary"><i class="fas fa-info-circle pr-2"  ></i>Add to Cart</a>
-
-
-
-
- if(isset($_POST['updateproduct']))
-{
-    $name=$_POST['product_title'];
-    $product_cat=$_POST['product_cat'];
-    $product_auther=$_POST['product_auther'];
-    $product_description=$_POST['product_desc'];
-    $product_price=$_POST['product_price'];
-    $product_qty=$_POST['product_qty'];
-    $product_img=$_FILES['product_img']['name'];
-
-
-    $query_up="UPDATE  books SET books_name='$name',product_cat='$product_cat',books_auther='$product_auther',books_discription='$product_description',books_price='$product_price',book_quantity='$product_quantity',book_cat="$product_cat"  WHERE id='$user_id'";
-
-
-    
-    $query_up_run = mysqli_query($conn,$query);
-    if($query_up_run){
-
-            $_SESSION['status']="User updated sucessfully";
-            header("Location:userproduct.php");
-            }
-            else
-            {
-            $_SESSION['status']="User updated fail";
-            header("Location:userproduct.php");
-            }
-
+<html>
+    <head>
+        <title>Places</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+            .bounce {
+    font-size: 5rem;
+    width: 100%;
+    margin: 3rem auto;
+    display: inline-flex;
+    justify-content: center;
+    -webkit-box-reflect: below -20px linear-gradient(transparent, #211e1e2e);
 }
 
+.bounce span {
+    display: inline-flex;
+    color: #738690;
+    font-family: "Impact", sans-serif;
+    animation: bounce 1s infinite;
+    letter-spacing: 5px;
+}
+.space {
+    margin-left: 20px; /* Adjust the value as needed */
+}
 
+@keyframes bounce {
+    0%,
+    50%,
+    100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-20px);
+    }
+}
 
-<!--slider-->
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner pt-2 pb-2 pb-sm-1">
-    <div class="carousel-item active">
-     <a href="Bestsellingbooks.html"> <img src="productslider2.jpg" class="d-block w-100" alt="..."></a>>
-    </div>
-    <div class="carousel-item">
-     <a href="Bestsellingbooks.html"> <img src="productslider3.jpg" class="d-block w-100" alt="..."></a>
-    </div>
-    <div class="carousel-item">
-      <a href="Bestsellingbooks.html"><img src="ps4.webp" class="d-block w-100" alt="..."></a>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+.ten span:nth-of-type(1) {
+    animation-delay: 0.1s;
+}
+
+.ten span:nth-of-type(2) {
+    animation-delay: 0.2s;
+}
+
+.ten span:nth-of-type(3) {
+    animation-delay: 0.3s;
+}
+
+.ten span:nth-of-type(4) {
+    animation-delay: 0.4s;
+}
+
+.ten span:nth-of-type(5) {
+    animation-delay: 0.5s;
+}
+
+.ten span:nth-of-type(6) {
+    animation-delay: 0.6s;
+}
+
+        </style>
+
+        <!-- CSS -->
+        <!--<link href="ratingstyle.css" type="text/css" rel="stylesheet" />-->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+        <link href='jquery-bar-rating-master/dist/themes/fontawesome-stars.css' rel='stylesheet' type='text/css'>
+
+        
+        <!-- Script -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="jquery-bar-rating-master/dist/jquery.barrating.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        $(function() {
+            $('.rating').barrating({
+                theme: 'fontawesome-stars',
+                onSelect: function(value, text, event) {
+
+                    // Get element id by data-id attribute
+                    var el = this;
+                    var el_id = el.$elem.data('id');
+
+                    // rating was selected by a user
+                    if (typeof(event) !== 'undefined') {
+                        
+                        var split_id = el_id.split("_");
+
+                        var placeid= split_id[1];  // placeid
+
+                        // AJAX Request
+                        $.ajax({
+                            url: 'rating_ajax.php',
+                            type: 'post',
+                            data: {placeid:placeid,rating:value},
+                            dataType: 'json',
+                            success: function(data){
+                                // Update average
+                                var average = data['averageRating'];
+                                $('#avgrating_'+placeid).text(average);
+                            }
+                        });
+                    }
+                }
+            });
+        });
+      
+        </script>
+    </head>
+    <body>
         
 
-
-<!--end slider-->
-<li class="nav-item">
-                <a class="nav-link" href="aboutus.html">About Us</a>
-              </li>
-
-
-
-
-
-
-              ///
-
-
-              <div class="nav">
-        <button style="float:left;width:60px;height:20px;margin:0px;background-color:red;"><a href="bill.php">Cart(<?php echo "$count" ?>)</a></button>
-    </div>
-    <div class="contain" style="width:100%;height:700px;background-color:white;">
     
-        <?php
-            $query = "SELECT * FROM items ORDER BY item_id ASC ";
-            $result = mysqli_query($conn,$query);
-            $num = mysqli_num_rows($result);
-            if($num>0){
 
-                while ($row = mysqli_fetch_array($result)) {
 
-                    ?>
-                    <div class="col-md-3" style="height:500px; ">
+        </div>
 
-                        <form method="post" action="cartSample.php">
+    </body>
+</html>
+<div class="content">
+<h2 class="bounce">
+    <span class="ten">Specific</span>
+    <span class="space"></span>
+    <span class="ten">Recommendation</span>
+</h2>
 
-                            <div class="product">
-                                <img src="<?php echo $row["image"]; ?>" >
-                                <h5 class="text-info"><?php echo $row["name"]; ?></h5>
-                                <h5 class="text-danger">Rs<?php echo  $row["price"]; ?></h5>
-                                <h5 class="text-danger"><?php echo $row["item_id"]; ?></h5>
-                     
-                                <input type="text" name="quantity" class="form-control" value="1">
-                                <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>">
-                                <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
-                                   <input type="hidden" name="i_id" value="<?php echo $row["item_id"]; ?>">
-                        
-                                <input type="submit" name="add" style="margin-top: 5px;" class="btn btn-success"
-                                       value="Add to Cart">
-                            </div>
-                        </form>
-                    </div>
-                    <?php
-                }
-            }
+    <?php
+    $username = $_SESSION['auth_user']['user_name'];
+    $query1 = "SELECT * FROM user_recommendations WHERE user_name='$username'";
+    $result1 = mysqli_query($conn, $query1);
+    $visitedPlaceIds = array();
+    
+    // Fetch the recommendations for the user and store them in variables.
+    while ($row1 = mysqli_fetch_array($result1)) {
+        $recoo1 = $row1['recommendation_1'];
+        $recoo2 = $row1['recommendation_2'];
+        $recoo3 = $row1['recommendation_3'];
+        $recoo4 = $row1['recommendation_4'];
+        $recoo5 = $row1['recommendation_5'];
+    
+        // Add the recommendations to the visitedPlaceIds array.
+        $visitedPlaceIds[] = $recoo1;
+        $visitedPlaceIds[] = $recoo2;
+        $visitedPlaceIds[] = $recoo3;
+        $visitedPlaceIds[] = $recoo4;
+        $visitedPlaceIds[] = $recoo5;
+    }
+    
+    // Create a comma-separated string of the recommendations to use in the SQL query.
+    $recoIdsString = implode(",", $visitedPlaceIds);
+    
+    $escapedPlaceNames = array_map(function($name) use ($conn) {
+        return "'" . mysqli_real_escape_string($conn, $name) . "'";
+    }, $visitedPlaceIds);
+    
+    // Create a comma-separated string of the escaped place names
+    $recoIdsString = implode(",", $escapedPlaceNames);
+    // Query the locations table using the recommendations in the WHERE clause.
+    $query = "SELECT * FROM locations WHERE place_name IN ($recoIdsString)";
+    $result = mysqli_query($conn, $query);
+    
+    while ($row = mysqli_fetch_array($result)) {
+        $placeid = $row['id'];
+        $title = $row['place_name'];
+        $content = $row['discription'];
+        $imgUrl = $row['imgUrl'];
+        // Rest of your code here...
         ?>
-      </div>
+        <div class="post">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <!--slider-->
+                    <img src="<?php echo $imgUrl; ?>" alt="image" class="image-style" style="height:200px; width:250px;border: 2px solid #ccc;border-radius: 5px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                </div>
+                <!--slider-->
+                <div class="col-md-6">
+                    <h2><?php echo $title; ?></h2>
+                    <div class="post-text mt-3">
+                        <input type="hidden" value="<?php echo $placeid; ?>" name="place_id">
+                        <?php echo $content; ?>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <?php
+    }
+    ?>
+</div>
 
 
 
-      <td>
-                                                                                            <img src="<?php echo"images/". $row['books_pic']; ?>" alt="img" width="70px">
-                                                                                        </td>
+
+<div class="content">
+<form action="visited.php">
+<h2 class="bounce">
+    <span class="ten">All</span>
+    <span class="space"></span>
+    <span class="ten">Places</span>
+</h2>
+            <?php
+                $userid = $_SESSION['auth_user']['user_id'] ;
+                $query1="SELECT place_id FROM visited WHERE userid='$userid'";
+                $result1 = mysqli_query($conn,$query1);
+                $visitedPlaceIds = array();
+                                while ($row1 = mysqli_fetch_array($result1)) {
+                                    $visitedPlaceIds[] = $row1['place_id'];
+                                }
+
+                                
+                                $notInClause = "";
+                                if (!empty($visitedPlaceIds)) {
+                                    $notInClause = " AND id NOT IN (" . implode(",", $visitedPlaceIds) . ")";
+                                }
+
+
+                $query = "SELECT * FROM locations WHERE 1" . $notInClause;
+                $result = mysqli_query($conn,$query);
+                while($row = mysqli_fetch_array($result)){
+                    $placeid = $row['id'];
+                    $title = $row['place_name'];
+                    $content = $row['discription'];
+                    $imgUrl=$row['imgUrl'];
+
+                   /*
+                    $averagerating= (float) $row['Avg.Ratings'];
+                    $totalraters=(int) $row['TotalRatings'];
+                    $sum= $averagerating*$totalraters;
+                    $sum=(int)$sum;
+                    $newsum=$sum+3;*/
+
+
+                    // User rating
+                    // User rating
+$query = "SELECT * FROM post_rating WHERE placeid=" . $placeid . " AND userid=" . $userid;
+$userresult = mysqli_query($conn, $query) or die(mysqli_error());
+
+// Check if any rows are returned
+if (mysqli_num_rows($userresult) > 0) {
+    // Rating is available for this user and place
+    $fetchRating = mysqli_fetch_array($userresult);
+    $rating = $fetchRating['rating'];
+} else {
+    // No rating found for this user and place
+    $rating = null; // Set the user's rating to null
+}
+
+// get average
+
+$query = "SELECT ROUND(AVG(rating),1) as averageRating FROM post_rating WHERE placeid=" . $placeid;
+$avgresult = mysqli_query($conn, $query) or die(mysqli_error());
+$fetchAverage = mysqli_fetch_array($avgresult);
+$averageRating = $fetchAverage['averageRating'];
 
 
 
+                    if($averageRating <= 0){
+                        $averageRating = "No rating yet.";
+                    }
+            ?>
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+<!--slider-->
+<img src="<?php echo $imgUrl; ?>" alt="image" class="image-style" style="height:200px; width:250px;border: 2px solid #ccc;border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
 
-
-
-
-
-                                                                                        
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<style type="text/css">
-		.form{
-		height:600px;
-		background-color:brown;
-		margin:0px 150px 0px;
-		background-image:linear-gradient(to right,red, white);
-		/*background-image:url(image/lib4.jpg);*/
-		border-radius:10px;
-	}
-	h1{
-		color:white;
-		text-align:center;
-		font-size:25px;
-		font-family:Consolas;
-	}
-	span{
-		margin-left:25%;
-		font-size:20px;
-		font-family:Apple Chancery;
-		color:white;
-
-		
-	}
-	input{
-		border-radius:10px;
-	}
-	input[type=submit]:hover{
-		background-color:skyblue;
-	}
-	input[type=submit]{
-		height:40px;
-		font-size:17px;
-		width:150px;
-		margin-left:50%;
-		background-color:transparent;
-		border:black solid 1.5px;
-		cursor:pointer;
-		transition-duration:0.4s;
-	
-	}
-	input[type=text],[type=password]{
-		height:40px;
-		width:40%;
-		border:black solid 1.5px;
-		background-color:transparent;
-	}
-	p{
-		font-size:20px;
-		font-family:Apple Chancery;
-		margin-left:27%;
-		color:white;
-	}
-	a button{
-		text-align:center;
-		font-size: 17px; 
-		font-family:Apple Chancery;
-		color:black;
-		margin-left:52px;
-		height:40px;
-		width:150px;
-		background-color:transparent;
-		border:black solid 1.5px;
-		border-radius:10px;
-	}
-	a button:hover{
-		background-color:skyblue;
-		text-decoration:none;
-	}
-	</style>
-</head>
-<body>
-	
-	    <?php           
-		if(isset($_SESSION['status'])){
-				echo"<h4>".$_SESSION['status']."</h4>";
-				unset($_SESSION['status']);
-		}
-  ?>
-	
-	<div class="form">
-	<h1>Registration Form</h1> 
-		<form method="POST" action="process.php">
-		<span>Name:<input type="text" name="name" style="margin-left:113px"></span><br><br>
-		<span>Email:<input type="text" name="email" style="margin-left: 112px"></span><br><br>
-		<span>Phone:<input type="text" name="phone" style="margin-left: 112px"></span><br><br>
-		<span>Password:<input type="password" name="password" value="" style="margin-left:81px"></span><br><br>
-		<span>Re-Enter Password:<input type="password" name="pasword" value="" style="margin-left:5px;"></span><br><br>
-		<input type="submit" name="submit" value="Submit"><br><br>
-		<!--<button>Login<a href="login.php"></a></button>-->
-		
-	</form>
-	<p>Already Have Account?<a href="login1.php"><button>Log In</button></a></p>
+                </div>
+<!--slider-->
+<div class="col-md-6">
+                        <h2><?php echo $title; ?></a></h2>
+                        <div class="post-text mt-3">
+                        <input type="hidden"  name="place_id">
+                            <?php echo $content; ?>
+                        </div>
+                        <div class="post-action mt-2">
+                            <!-- Rating -->
+                            <select class='rating mt-2' id='rating_<?php echo $placeid; ?>' data-id='rating_<?php echo $placeid; ?>'>
+                                <option value="1" >1</option>
+                                <option value="2" >2</option>
+                                <option value="3" >3</option>
+                                <option value="4" >4</option>
+                                <option value="5" >5</option>
+                            </select>
+                            <div style='clear: both;'></div>
+                            <div class="">
+                            Average Rating : <span id='avgrating_<?php echo $placeid; ?>'><?php echo $averageRating; ?></span>
+                            
+                            </div>
+                            <button class="btn btn-primary" type="submit" value="<?php echo $placeid ?>" name="submit" style="width: 100px; height: 30px;">Vistied</button>
+                            </form>
+                            <!-- Set rating -->
+                            <script type='text/javascript'>
+                            $(document).ready(function(){
+                                $('#rating_<?php echo $placeid; ?>').barrating('set',<?php echo $rating; ?>);
+                            });
+                            
+                            </script>
+                        </div>
+                    </div>
+                    <hr>
+                    </div>
+            <?php
+                }
+            ?>
 </div>
 <?php
-//session_start();
-
-//echo $_SESSION['sname'];
-   ?>
-
-</body>
-</html>
+include('footer.php');
+?>

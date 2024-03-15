@@ -3,10 +3,10 @@
 
 
 <?php
-include("authentication.php");
-include("header.php");
 
-include("database.php");
+include("include/header.php");
+
+include("include/database.php");
 ?>
 
 
@@ -14,15 +14,16 @@ include("database.php");
 <div class="content-wrapper pt-2">
             <div class="content">
                 <div class="container">
+                <div class="row">
+        <div class="col-md-12">
+          <?php
+          include("include/message.php");
+          ?>
+        </div>
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
-                                                    <?php           
-                                    if(isset($_SESSION['status'])){
-                                            echo"<h4>".$_SESSION['status']."</h4>";
-                                            unset($_SESSION['status']);
-                                    }
-                              ?>
+                                                
                             <div class="card">
                                 <div class="card-header">
                                     <h4>
@@ -85,17 +86,7 @@ include("database.php");
                                                             <div class="row">
                                                             <div class="col">
 
-                                                            <div class="form-group ">
-                                                                <label for="">Longitude</label>
-                                                                <input type="text" class="form-control place_longitude" name="p_longitude" >
-                                                            </div>
-                                                                    </div>
-                                                                    <div class="col">
-                                                            <div class="form-group">
-                                                                <label for="">Latitude</label>
-                                                                <input type="text" class="form-control place_latitude" name="p_latitude" >
-
-                                                            </div>
+                                                           
                                                                     </div>
                                                                     </div>
                                                             <!--End of long and lati-->
@@ -114,7 +105,7 @@ include("database.php");
 
 
                                                                 <div class="col mt-2 d-flex ">
-                                                                <button type="submit" name="submitplaces" class="btn btn-primary float-right" >Submit</button>
+                                                                <button type="submit" name="submitplaces" class="btn btn-primary float-right " >Submit</button>
                                                                 </div>       
 
                                                                     </div>
@@ -178,3 +169,5 @@ include("database.php");
                     }
                     </script>
                 
+<?php
+include('include/footer.php');?>

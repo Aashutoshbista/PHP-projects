@@ -99,17 +99,12 @@
               <li class="nav-item">
                 <a href="Csvfile.php" class="nav-link btn btn-primary ">
                 <i class="bi bi-arrow-bar-up"></i>
-                  <p>Add File
+                  <p>Added Places
                   
                   </p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="../email/email.php/" class="nav-link btn btn-primary">
-               
-                  <p>Send message</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="register.php" class="nav-link">
                   <i class="nav-icon fa fa-users"></i>

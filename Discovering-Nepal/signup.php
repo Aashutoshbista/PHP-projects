@@ -6,7 +6,7 @@ session_start();
   <head>
     <style>
     body{
-        background-image: url('Mount-Everest.webp');
+        background-image: url('image/Mount-Everest.webp');
 
     }
     .box{
@@ -320,16 +320,16 @@ session_start();
                                             <label>Preferences and Interests:</label>
                                                     <div class="checkboxes" required>
                                                     <div class="row">
-                                                    <div class="col-md-4">  <label><input type="checkbox" name="Tags[]" value="Historical and Cultural Sites" onclick="limitCheckboxSelection()"> Historical and Cultural Sites</label></div>
-                                                   <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="Religious and Pilgrimage Sites" onclick="limitCheckboxSelection()"> Religious and Pilgrimage Sites</label></div>
+                                                    <div class="col-md-4">  <label><input type="checkbox" name="Tags[]" value="1" onclick="limitCheckboxSelection()"> Historical and Cultural Sites</label></div>
+                                                   <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="2" onclick="limitCheckboxSelection()"> Religious and Pilgrimage Sites</label></div>
 
-                                                       <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="Hill Stations and View Towers" onclick="limitCheckboxSelection()"> Hill Stations and View Towers</label></div>
+                                                       <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="3" onclick="limitCheckboxSelection()"> Hill Stations and View Towers</label></div>
                                                 </div>
                                                 <div class="row">
-                                                <div class="col-md-4">      <label><input type="checkbox" name="Tags[]" value="Trekking and Hiking Trails" onclick="limitCheckboxSelection()"> Trekking and Hiking Trails</label></div>
-                                                <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="Lakes, Rivers and Water Bodies" onclick="limitCheckboxSelection()"> Trekking and Hiking</label></div>
+                                                <div class="col-md-4">      <label><input type="checkbox" name="Tags[]" value="4" onclick="limitCheckboxSelection()"> Trekking and Hiking Trails</label></div>
+                                                <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="5" onclick="limitCheckboxSelection()"> Trekking and Hiking</label></div>
                                                             
-                                                <div class="col-md-4">   <label><input type="checkbox" name="Tags[]" value="Natural Landscapes" onclick="limitCheckboxSelection()"> Natural Landscapes</label></div>
+                                                <div class="col-md-4">   <label><input type="checkbox" name="Tags[]" value="6" onclick="limitCheckboxSelection()"> Natural Landscapes</label></div>
 
                                                 </div>
                                                 

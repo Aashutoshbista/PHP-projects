@@ -139,15 +139,18 @@ include("config/dbcon.php");
                                                                 <label>Catagory:</label>
                                                                                                     <div class="checkboxes" required>
                                                                                                         <div class="row">
-                                                                                                                            <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="Lakes" > Lakes</label></div>
-                                                                                                                            <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="Hillstations" > Hillstations</label></div>
-                                                                                                                            <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="Valleys" > Valleys</label></div>
+                                                                                                                            <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="1" > Historical and Cultural Sites</label></div>
+                                                                                                                            <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="2" > Religious and Pilgrimage Sites</label></div>
+                                                                                                                            <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="3" >  Hill Stations and View Towers</label></div>
                                                                                                     </div>
                                                                                                             <div class="row">
-                                                                                                                 <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="Religious Sites" > Religious Sites</label></div>
-                                                                                                                <div class="col-md-4"><label><input type="checkbox" name="catagory[]" value="Wildlife and Natural Reserves" > Wildlife and Natural Reserves</label></div>
-                                                                                                                <div class="col-md-4">  <label><input type="checkbox" name="catagory[]" value="Adventure and Trekking" > Adventure and Trekking</label></div>
+                                                                                                                 <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="4" > Trekking and Hiking Trails</label></div>
+                                                                                                                <div class="col-md-4"><label><input type="checkbox" name="catagory[]" value="5" > Trekking and Hiking</label></div>
+                                                                                                                <div class="col-md-4">  <label><input type="checkbox" name="catagory[]" value="6" > Natural Landscapes</label></div>
                                                                                                     </div>
+
+                                                                                                    
+
                                                                                                     <!--                                                                                                    <div class="row">
                                                                                                     <div class="col-md-4">  <label><input type="checkbox" name="catagory[]" value="G" > G</label></div>
                                                                                                     <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="G" > G</label></div>

@@ -2,7 +2,7 @@
 include('authentication.php');
 include('config/dbcon.php');
 
-/*here is code for to add books */
+/*here is code for to add  */
 /*
  $query="INSERT INTO places(p_name,p_longitude,p_latitude,p_discription,p_image,p_catagory,p_prov,p_type) 
  VALUES('$name','$p_longitude','$p_latitude','$$p_description','$$dataofimg','$dataofcat','$p_prov','$p_type')";
@@ -119,6 +119,7 @@ if(isset($_POST['Deleteplace']))
             }
 
 }
+
 if(isset($_POST['UDeleteplace']))
 
 {
@@ -154,7 +155,7 @@ if(isset($_POST['submitSplace']))
     $p_longitude=$_POST['p_longitude'];
     $p_description=$_POST['p_description'];
     $p_latitude=$_POST['p_latitude'];
-    $p_cat=$_POST['catagory'];
+    $p_cat=$_POST['Tags'];
     $dataofcat=implode(",",$p_cat);
     $p_type=$_POST['type'];
     

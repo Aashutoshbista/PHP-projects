@@ -1,5 +1,5 @@
 <?php
-include('database.php');
+include('include/database.php');
                                       if(isset($_POST['submitsearch'])){
                                         $search=mysqli_real_escape_string($conn,$_POST['searchinput']);
                                         $query="SELECT *  FROM places WHERE p_name LIKE '%$search%' OR p_prov LIKE '%$search%' OR p_catagory LIKE '%$search%' OR p_type LIKE '%$search%'";

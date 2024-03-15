@@ -62,7 +62,7 @@ include("config/dbcon.php");
                                                     <th>Category</th>
                                                     <th>Longitude</th>
                                                     <th>Latitude</th>
-                                                    <th>Provinence</th>
+                                                    <th>Image</th>
                                                    <!-- <th>Image</th>-->
                                                     
                                                     
@@ -72,7 +72,7 @@ include("config/dbcon.php");
                                                     </thead>
                                                     <tbody>
                                                         <?php   
-                                                            $query="SELECT * FROM places";
+                                                            $query="SELECT * FROM locations";
                                                             $query_run= mysqli_query($conn,$query);
                                                             if(mysqli_num_rows($query_run) > 0)
                                                             {
@@ -81,19 +81,19 @@ include("config/dbcon.php");
                                                                             //echo $roe['name'];
                                                                             ?>
                                                                                  <tr>
-                                                                                        <td><?php echo $row['p_name'];  ?></td>  
-                                                                                        <td><?php echo $row['p_id'];  ?></td>       
-                                                                                        <td><?php echo $row['p_catagory'];  ?></td>
-                                                                                        <td><?php echo $row['p_longitude'];  ?></td>
-                                                                                        <td><?php echo $row['p_latitude']; ?></td>
-                                                                                        <td><?php echo $row['p_prov']; ?></td>
+                                                                                        <td><?php echo $row['place_name'];  ?></td>  
+                                                                                        <td><?php echo $row['id'];  ?></td>       
+                                                                                        <td><?php echo $row['Category_Ids'];  ?></td>
+                                                                                        <td><?php echo $row['longitude'];  ?></td>
+                                                                                        <td><?php echo $row['latitude']; ?></td>
+                                                                                        <td><img src="<?php echo $row['imgUrl']; ?>" alt="" style="height:100px; width:100px;"></td>
                                                                                        <!-- <td>
                                                                                             <img src="<?php/* echo"images/". $row['p_image'];*/ ?>" alt="img" width="70px">
                                                                                         </td>-->
                                                                                        
                                                                                         <td>
                                                                                             
-                                                                                            <button type="button" value="<?php echo $row['p_id'];?>" class="btn btn-danger deletebtn">Delete</button>
+                                                                                            <button type="button" value="<?php echo $row['id'];?>" class="btn btn-danger deletebtn">Delete</button>
                                                                                         </td>
                                                                                         
                                                                                     </tr>

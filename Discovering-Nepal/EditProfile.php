@@ -1,7 +1,7 @@
 <?php
-include('authentication.php');
-include('database.php');
-include('header.php');
+
+include('include/database.php');
+include('include/header.php');
 
 
 
@@ -9,10 +9,7 @@ include('header.php');
 ?>
 <main>
 <?php           
-if(isset($_SESSION['status'])){
-echo"<h4>".$_SESSION['status']."</h4>";
-unset($_SESSION['status']);
- }
+
 
 $user_id=$_SESSION['auth_user']['user_id'];
   $query="SELECT * FROM users WHERE id=$user_id";
@@ -135,7 +132,7 @@ $user_id=$_SESSION['auth_user']['user_id'];
     
     <?php 
      }}
-     
+     include('include/footer.php');
     ?>
              
     </main>

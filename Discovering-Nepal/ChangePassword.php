@@ -1,9 +1,9 @@
 <?php
 
-include("authentication.php");
-include("headerforothers.php");
 
-include('database.php');
+include("include/header.php");
+
+include('include/database.php');
 
 ?>
 
@@ -29,12 +29,7 @@ include('database.php');
     <div class="container pt-2">
         <div class="row">
     <div class="col-sm-2"></div>
-    <?php           
-                                    if(isset($_SESSION['status'])){
-                                            echo"<h4>".$_SESSION['status']."</h4>";
-                                            unset($_SESSION['status']);
-                                    }
-                              ?>
+    
                                </div>
         <div class="row">
        
@@ -49,7 +44,7 @@ include('database.php');
                 <label>New Password</label>
                 <input type="password" name="new_pass" class="form-control new_pass " placeholder="New Password"  required/>
             </div>
-            <input type="submit" name="ChangePassword" class="btn btn-primary changepassword mt-3" value="Submit">
+            <button type="submit" name="ChangePassword" class="btn btn-primary changepassword mt-3" value="Submit">Submit</button>
         </form>
 
         </div>
@@ -57,4 +52,7 @@ include('database.php');
 
 
 
+<?php
+include('include/footer.php');
 
+?>

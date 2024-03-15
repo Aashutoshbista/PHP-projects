@@ -1,7 +1,7 @@
 <?php
-include('authentication.php');
-include('database.php');
-include('header.php');
+include('include/authentication.php');
+include('include/database.php');
+include('include/header.php');
 
 
 $searchErr = '';

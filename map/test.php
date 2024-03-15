@@ -155,6 +155,50 @@
     };
     xhr.send();
 }
+//start
+function displayLocationInfo1(marker, imgUrl, name, description, id) {
+  var location = marker.getPosition();
+
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ location: location }, function (results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if (results[0]) {
+        var locationInfo = results[0].formatted_address;
+        var infoContent = '<div class="container mt-3">' +
+                          '<div class="row">' +
+                          '<div class="col-md-6">' +
+                          '<div class="text-center">' +
+                          '<img src="' + imgUrl + '" class="img-fluid" alt="Location Image">' +
+                          '</div>' +
+                          '</div>' +
+                          '<div class="col-md-6">' +
+                          '<div class="p-3">' +
+                          '<p class="h4">Location Information</p>' +
+                          '<p>' + locationInfo + '</p>' +
+                          '<h2>Name: ' + name + '</h2>' +
+                          '<p>' + description + '</p>' +
+                          '</div>' +
+                          '</div>' +
+                          '</div>' +
+                          '</div>' + '<span id="closeButton" onclick="hideSecondDiv()">&times;</span>';
+
+        // Set the content in the <div id="info">
+        document.getElementById('info').innerHTML = infoContent;
+      } else {
+        console.error("No results found for the location.");
+      }
+    } else {
+      console.error("Geocoder failed due to: " + status);
+    }
+//end
+
+
+
+
+
+
+
+
 
 
         function clearMarkers() {

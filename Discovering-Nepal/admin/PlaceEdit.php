@@ -132,7 +132,7 @@ include("config/dbcon.php");
                                                             <div class="form-group">
                                                                 <label for="">Place Description</label>
                                                                 
-                                                                <textarea class="form-control place_description" value="<?php echo $row['p_discription']?>" name="p_description" rows="8" cols="80" requried></textarea>
+                                                                <textarea class="form-control place_description" value="" name="p_description" rows="8" cols="80" requried> <?php echo $row['p_discription']?></textarea>
                                                             </div>
                                                             <div class="show-error"></div>
 
@@ -170,17 +170,22 @@ include("config/dbcon.php");
                                                                 <div class="col-md-6 pl-4">
                                                                     
                                                                 <label>Catagory:</label>
-                                                                                                    <div class="checkboxes" required>
-                                                                                                        <div class="row">
-                                                                                                                            <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="Lakes" > Lakes</label></div>
-                                                                                                                            <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="Hillstations" > Hillstations</label></div>
-                                                                                                                            <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="Valleys" > Valleys</label></div>
-                                                                                                    </div>
-                                                                                                            <div class="row">
-                                                                                                                 <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="Religious Sites" > Religious Sites</label></div>
-                                                                                                                <div class="col-md-4"><label><input type="checkbox" name="catagory[]" value="Wildlife and Natural Reserves" > Wildlife and Natural Reserves</label></div>
-                                                                                                                <div class="col-md-4">  <label><input type="checkbox" name="catagory[]" value="Adventure and Trekking" > Adventure and Trekking</label></div>
-                                                                                                    </div>
+                                                                                                   
+                                      
+                                                    <div class="checkboxes" required>
+                                                    <div class="row">
+                                                    <div class="col-md-4">  <label><input type="checkbox" name="Tags[]" value="1" onclick="limitCheckboxSelection()"> Historical and Cultural Sites</label></div>
+                                                   <div class="col-md-4">       <label><input type="checkbox" name="Tags[]" value="2" onclick="limitCheckboxSelection()"> Religious and Pilgrimage Sites</label></div>
+
+                                                       <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="3" onclick="limitCheckboxSelection()"> Hill Stations and View Towers</label></div>
+                                                </div>
+                                                <div class="row">
+                                                <div class="col-md-4">      <label><input type="checkbox" name="Tags[]" value="4" onclick="limitCheckboxSelection()"> Trekking and Hiking Trails</label></div>
+                                                <div class="col-md-4">     <label><input type="checkbox" name="Tags[]" value="5" onclick="limitCheckboxSelection()"> Trekking and Hiking</label></div>
+                                                            
+                                                <div class="col-md-4">   <label><input type="checkbox" name="Tags[]" value="6" onclick="limitCheckboxSelection()"> Natural Landscapes</label></div>
+
+                                                </div>
                                                                                                     <!--                                                                                                    <div class="row">
                                                                                                     <div class="col-md-4">  <label><input type="checkbox" name="catagory[]" value="G" > G</label></div>
                                                                                                     <div class="col-md-4"> <label><input type="checkbox" name="catagory[]" value="G" > G</label></div>

@@ -1,6 +1,6 @@
 <?php
 // Include your database connection here...
-include('database.php');
+include('include/database.php');
 
 if (isset($_GET['latitude']) && isset($_GET['longitude'])) {
     $latitude = floatval($_GET['latitude']);
@@ -25,9 +25,11 @@ error_log('Query: ' . $query);
                 //'place_name' => $row['place_name'],
                 'latitude' => $row['latitude'],
                 'longitude' => $row['longitude'],
-                'name'=> $row['place_name'],
-                'discription'=> $row['discription'],
-                'imageUrl' => $row['imgUrl']
+                'imageUrl' => $row['imgUrl'],
+                'name'  => $row['place_name'],
+                'post_id' => $row['id'],
+                'discription'=>$row['discription']
+                
                 //'distance' => $row['distance']
             );
         }
@@ -52,7 +54,7 @@ error_log('Query: ' . $query);
             AS distance
             FROM locations
             ORDER BY distance ASC
-            LIMIT 5";
+            LIMIT 3";
 
         $result = mysqli_query($conn, $query);
         $places = array();
@@ -64,8 +66,9 @@ error_log('Query: ' . $query);
                     'latitude' => $row['latitude'],
                     'longitude' => $row['longitude'],
                     'imageUrl' => $row['imgUrl'],
-                    'name' => $row['place_name'],
-                'discription'=> $row['discription']
+                    'name'      => $row['place_name'],
+                    'post_id' => $row['id'],
+                    'discription'=>$row['discription']
                     //'distance' => $row['distance']
                 );
             }

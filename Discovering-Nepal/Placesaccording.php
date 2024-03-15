@@ -1,13 +1,71 @@
 <?php
 
-include "database.php";
-include('authentication.php');
-include('header.php');
+include "include/database.php";
+
+include('include/header.php');
 
 ?>
 <html>
     <head>
         <title>Places</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+            .bounce {
+    font-size: 5rem;
+    width: 100%;
+    margin: 3rem auto;
+    display: inline-flex;
+    justify-content: center;
+    -webkit-box-reflect: below -20px linear-gradient(transparent, #211e1e2e);
+}
+
+.bounce span {
+    display: inline-flex;
+    color: #738690;
+    font-family: "Impact", sans-serif;
+    animation: bounce 1s infinite;
+    letter-spacing: 5px;
+}
+.space {
+    margin-left: 20px; /* Adjust the value as needed */
+}
+
+@keyframes bounce {
+    0%,
+    50%,
+    100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-20px);
+    }
+}
+
+.ten span:nth-of-type(1) {
+    animation-delay: 0.1s;
+}
+
+.ten span:nth-of-type(2) {
+    animation-delay: 0.2s;
+}
+
+.ten span:nth-of-type(3) {
+    animation-delay: 0.3s;
+}
+
+.ten span:nth-of-type(4) {
+    animation-delay: 0.4s;
+}
+
+.ten span:nth-of-type(5) {
+    animation-delay: 0.5s;
+}
+
+.ten span:nth-of-type(6) {
+    animation-delay: 0.6s;
+}
+
+        </style>
 
         <!-- CSS -->
         <!--<link href="ratingstyle.css" type="text/css" rel="stylesheet" />-->
@@ -64,93 +122,24 @@ include('header.php');
 
     </body>
 </html>
+<?php 
 
+$query = "SELECT * FROM user_recommendations WHERE user_name= '" . $_SESSION['auth_user']['user_name'] . "'";
+$query_run = mysqli_query($conn, $query);
 
-
-
-
-
-
-<div class="content">
-            <p style='color: red;'>Places Acoording to your preference.</p>
-            <?php
-                $userid = $_SESSION['auth_user']['user_id'] ;
-                $query = "SELECT * FROM locations";
-                $result = mysqli_query($conn,$query);
-                while($row = mysqli_fetch_array($result)){
-                    $placeid = $row['id'];
-                    $title = $row['place_name'];
-                    $content = $row['discription'];
-                    $imgUrl=$row['imgUrl'];
-
-                    // User rating
-                    // User rating
-$query = "SELECT * FROM post_rating WHERE placeid=" . $placeid . " AND userid=" . $userid;
-$userresult = mysqli_query($conn, $query) or die(mysqli_error());
-
-// Check if any rows are returned
-if (mysqli_num_rows($userresult) > 0) {
-    // Rating is available for this user and place
-    $fetchRating = mysqli_fetch_array($userresult);
-    $rating = $fetchRating['rating'];
+if ($query_run && mysqli_num_rows($query_run) > 0) {
+    include('recommendation.php');
+    include('Allplaces.php');
 } else {
-    // No rating found for this user and place
-    $rating = null; // Set the user's rating to null
+    include('Allplaces.php');
 }
 
-// get average
-$query = "SELECT ROUND(AVG(rating),1) as averageRating FROM post_rating WHERE placeid=" . $placeid;
-$avgresult = mysqli_query($conn, $query) or die(mysqli_error());
-$fetchAverage = mysqli_fetch_array($avgresult);
-$averageRating = $fetchAverage['averageRating'];
+
+?>
 
 
-
-                    if($averageRating <= 0){
-                        $averageRating = "No rating yet.";
-                    }
-            ?>
-                    <div class="post">
-                        <div class="row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-4">
-<!--slider-->
-<img src="<?php echo $imgUrl; ?>" alt="image" class="image-style" style="height:200px; width:250px;border: 2px solid #ccc;border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-
-                </div>
-<!--slider-->
-<div class="col-md-6">
-                        <h2><?php echo $title; ?></a></h2>
-                        <div class="post-text mt-3">
-                            <?php echo $content; ?>
-                        </div>
-                        <div class="post-action mt-2">
-                            <!-- Rating -->
-                            <select class='rating mt-2' id='rating_<?php echo $placeid; ?>' data-id='rating_<?php echo $placeid; ?>'>
-                                <option value="1" >1</option>
-                                <option value="2" >2</option>
-                                <option value="3" >3</option>
-                                <option value="4" >4</option>
-                                <option value="5" >5</option>
-                            </select>
-                            <div style='clear: both;'></div>
-                            <div class="">
-                            Average Rating : <span id='avgrating_<?php echo $placeid; ?>'><?php echo $averageRating; ?></span>
-                            </div>
-                            
-                            <!-- Set rating -->
-                            <script type='text/javascript'>
-                            $(document).ready(function(){
-                                $('#rating_<?php echo $placeid; ?>').barrating('set',<?php echo $rating; ?>);
-                            });
-                            
-                            </script>
-                        </div>
-                    </div>
-                    <hr>
-                    </div>
-            <?php
-                }
-            ?>
+           
 </div>
+<?php
+include('include/footer.php');
+?>

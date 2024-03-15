@@ -1,5 +1,5 @@
 <?php        
-include('database.php');
+include('include/database.php');
 session_start();
 
 
@@ -29,57 +29,51 @@ if(isset($_POST['logout_btn'])){
 
 /*
 */
-if(isset($_SESSION['auth_user']['user_id']) && $_SESSION['auth']=="0") {
-    if(isset($_POST['ChangePassword'])){
-        $user=$_SESSION['auth_user']['user_id'];
-        $new=$_POST['new_pass'];
-        $old=$_POST['old_pass'];
-        
-        
-       $querypass="SELECT password FROM users WHERE id=$user";
-        $querypass_run=mysqli_query($conn,$querypass);
-        if($querypass){
-            foreach($querypass_run as $row){
-           
-               
-           
-            if($row['password']==$old){
-                           
-                            
-                                if($new==$old){
-                                    $_SESSION['status']="password cannot be same as previous";
-                                    header("Location:change-password.php");
-            
-            
-                                }
-                                else{
-                                    $queryupdate="UPDATE  users SET  password='$new' WHERE id='$user'";
-                                    $queryupdate_run = mysqli_query($conn,$queryupdate);
-                                    if($queryupdate_run)
-                                    {
-                                        $_SESSION['status']="password updated sucessfully";
-                                        header("Location: ChangePassword.php");
-                                    }
-                                    else{
-                                        $_SESSION['status']="password update failed";
-                                        header("Location:ChangePassword.php");
-                                    }
-            
-                                
-                    
-                        }
-                    }
-                    
-            else{
-                $_SESSION['status']="password didnot match the old password ";
-                header("Location: ChangePassword.php");
-                
-            }
+if (isset($_POST['ChangePassword'])) {
+    $user = $_SESSION['auth_user']['user_id'];
+    $new = $_POST['new_pass'];
+    $old = $_POST['old_pass'];
 
+    // Password validation pattern
+    $password_pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
+
+    // Check if the new password matches the validation pattern
+    if (!preg_match($password_pattern, $new)) {
+        $_SESSION['status'] = "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character (@$!%*?&), and be at least 8 characters long.";
+        header("Location: Changepassword.php");
+        exit(); // Stop further execution of the code
+    }
+
+    $querypass = "SELECT password FROM users WHERE id=$user";
+    $querypass_run = mysqli_query($conn, $querypass);
+
+    if ($querypass_run) {
+        foreach ($querypass_run as $row) {
+            if ($row['password'] == $old) {
+                if ($new == $old) {
+                    $_SESSION['status'] = "Password cannot be the same as the previous one.";
+                    header("Location:Changepassword.php");
+                    exit(); // Stop further execution of the code
+                } else {
+                    $queryupdate = "UPDATE  users SET  password='$new' WHERE id='$user'";
+                    $queryupdate_run = mysqli_query($conn, $queryupdate);
+
+                    if ($queryupdate_run) {
+                        $_SESSION['status'] = "Password updated successfully.";
+                        header("Location: ChangePassword.php");
+                    } else {
+                        $_SESSION['status'] = "Password update failed.";
+                        header("Location:ChangePassword.php");
+                    }
+                }
+            } else {
+                $_SESSION['status'] = "Old password did not match.";
+                header("Location: ChangePassword.php");
+            }
         }
     }
 }
-}
+
 if(isset($_POST['updateuser'])){
 $user_id=$_POST['user_id'];
 $user_name=$_POST['user_name'];
@@ -99,7 +93,7 @@ $queryup_run=mysqli_query($conn,$queryup);
 if($queryup_run){
    
     $_SESSION['status']="Updated Sucessfully  ";
-    header("Location:EditProfile.php");
+    header("Location:Profile.php");
     
 }else{
     $_SESSION['status']=" UnSucessfully  ";
@@ -119,20 +113,20 @@ if($queryup_run){
 if(isset($_POST['submitplaces'])){
     $name=$_POST['p_name'];
     $p_prov=$_POST['provinces'];
-    $p_longitude=$_POST['p_longitude'];
+ 
     $p_description=$_POST['p_description'];
-    $p_latitude=$_POST['p_latitude'];
+   
  
     
    
 
 
 
- $query="INSERT INTO u_places(p_name,p_longitude,p_latitude,p_discription,p_image,p_prov) 
- VALUES('$name','$p_longitude','$p_latitude','$$p_description','$p_img','$p_prov')";
+ $query="INSERT INTO u_places(p_name,p_discription,p_image,p_prov) 
+ VALUES('$name','$p_description','$p_img','$p_prov')";
  $query_run=mysqli_query($conn,$query);
  if($query_run){
-     
+    $_SESSION['status']=" Sucessfully Added";
      header("Location: AddPlaces.php");
      }
      else

@@ -38,19 +38,19 @@ include('config/dbcon.php');
         </div>
           
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
               <?php
-                      $query = "SELECT p_id FROM places ";
+                      $query = "SELECT id FROM locations ";
                      $query_run= mysqli_query($conn,$query);
                      $row= mysqli_num_rows($query_run);
                      echo'<h3>'  .$row. '</h3>';
                      ?> 
 
 
-                <p>Places</p>
+                <p>Total Places</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -59,7 +59,7 @@ include('config/dbcon.php');
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
@@ -81,7 +81,7 @@ include('config/dbcon.php');
             </div>
           </div>
           <!-- ./col --> 
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-danger bg-warning">
               <div class="inner">
@@ -101,6 +101,8 @@ include('config/dbcon.php');
               <a href="category.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+         
+              
           <!-- ./col -->
         </div>
         <!-- /.row -->

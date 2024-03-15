@@ -1,7 +1,7 @@
 <?php
-include('authentication.php');
-include('database.php');
-include('header.php');
+
+include('include/database.php');
+include('include/header.php');
 
 
 
@@ -46,7 +46,12 @@ input[type=file]::-webkit-file-upload-button{
 }
 
 </style>
-
+<div class="row">
+        <div class="col-md-12">
+          <?php
+          include("include/message.php");
+          ?>
+        </div>
 <div class="container pt-3">
     <div class="main-body">
           <div class="row gutters-sm ">
@@ -175,7 +180,7 @@ input[type=file]::-webkit-file-upload-button{
 
        }
       }
-    
+    include('include/footer.php');
       
 
     ?>
