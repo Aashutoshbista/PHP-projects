@@ -1,0 +1,14 @@
+.container-login{
+    
+    width: 600px;
+ 
+    display: block;
+    justify-content: center;
+}
+.headingoflogin{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 3rem;
+    padding-left: 160px;
+    
+
+}
